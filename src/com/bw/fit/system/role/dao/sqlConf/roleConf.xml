@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="roleSql">
+	<sql id="paginationSql">
+		<![CDATA[ and rn >#{start_num} and rn <= #{end_num} ]]>   
+	</sql>
+	<select id="getAllRoles"  parameterType="string" resultType="tRole">
+		select * from t_role where 1=1 
+				and (
+					name like '%'||#{name,jdbcType=VARCHAR}||'%' or desp like '%'||#{name,jdbcType=VARCHAR}||'%'
+				)
+	</select>
+
+		
+	<select id="getAuthoritysByRole"  parameterType="String" resultType="tAuthority">
+		select a.* from t_role2authority  ra ,t_authority a 
+		where ra.authorityid = a.code  and a.isdeleted='0' and ra.roleid = #{roleId}
+	</select>	
+	
+	<select id="getMenusByRole"  parameterType="String" resultType="menu">
+		select m.id,m.parentid,m.title,m.isdeleted,m.icon,m.href,m.opened from t_menu m,t_role2menu rm 
+		where rm.menuid = m.id and m.isdeleted='0'  and rm.roleid =#{roleId} order by m.id asc
+	</select>
+	
+	
+	<select id="getRoles" parameterType="tRole" resultType="tRole">
+		select * from (
+		select a.*,rownum rn from t_role a where 1=1 and a.isdeleted ='0' 
+		and ( a.name like '%'||#{keyWords,jdbcType=VARCHAR}||'%'
+ 		or a.desp like '%'||#{keyWords,jdbcType=VARCHAR}||'%' ) order by versionTime desc
+ 		) cc where 1=1  		
+		<if test="paginationEnable!='0'.toString()">		
+			<include refid="paginationSql"></include>
+		</if>
+	</select>
+	
+	<!-- 根据角色id查询正在使用有效账户总数 -->
+	<select id="getAccountCntOfRole" parameterType="String" resultType="int">
+		 select count(1) from t_account ta ,t_account2role tr 
+ 		where tr.accountid = ta.id and ta.isdeleted='0' 
+ 		and tr.roleid = #{roleId}
+	</select>
+	
+	<update id="delete" parameterType="String" >
+		update t_role set isdeleted='1',versionTime=sysdate where id = #{id}
+	</update>
+	
+	<insert id="insert" parameterType="TRole" >
+		insert into t_role (id,name,desp,creator,createtime,versiontime,createorgid,isdeleted) values
+		(#{id},#{name,jdbcType=VARCHAR},#{desp,jdbcType=VARCHAR},#{creator,jdbcType=VARCHAR},sysdate,sysdate,#{createOrgId,jdbcType=VARCHAR},'0')
+	</insert>
+	
+	<select id="getAuthsOfThisRole"  parameterType="String" resultType="TAuthority">
+		select a.* from t_role2authority ra ,t_authority a where a.code = ra.authorityid
+ 		and a.isdeleted='0' and ra.roleid = #{roleId}
+	</select>
+	
+	<select id="get"  parameterType="String" resultType="tRole">
+		select * from t_role where id = #{id}
+	</select>
+	
+	<insert id="insertAuthority2Role"  parameterType="TRole2Authority" >
+		insert into t_role2authority (roleId,authorityId) values (#{roleId},#{authorityId})
+	</insert>
+	<delete id="deleteAuthority2Role" parameterType="TRole2Authority" >
+		delete from t_role2authority where roleid = #{roleId}
+	</delete>
+	<select id="getAuthority2Role" parameterType="TRole2Authority" resultType="TAuthority"> 
+		select ta.*
+ 		from t_role2authority a ,t_authority ta 
+ 		where ta.code = a.authorityid and ta.isdeleted='0' and a.roleid=#{roleId}
+	</select>
+	
+	<select id="getDataAuthoritysByRole" parameterType="string" resultType="TRole2dataauth"> 
+		select * from t_role2dataauth where roleid = #{roleId} 
+	</select>
+	
+	<delete id="deleteDataAuthority2Role"  parameterType="string">
+		delete from t_role2dataauth where roleid = #{roleId}
+	</delete>
+	<insert id="grantDataAuthority2Role" parameterType="baseModel">
+		insert into t_role2dataauth (roleid,authid) values (#{id},#{action_name})
+	</insert>
+	
+	<delete id="deleteRole2Menus"  parameterType="string">
+		delete from t_role2menu where roleid = #{roleId}
+	 </delete>
+	 <select id="getMenusOfRole" parameterType="string" resultType="menu"> 
+	 	select m.* from t_role2menu rm ,t_menu m 
+		where m.id = rm.menuid and m.isdeleted ='0' 
+		and rm.roleid = #{roleId}
+	 </select>
+	 <insert id="grantMenus2role" parameterType="baseModel">
+	 	insert into t_role2menu (roleid,menuid) values (#{id},#{logId})
+	 </insert>
+	 
+	 <select id="getRoleDataAuthOrgs" parameterType="String" resultType="baseModel"> 
+	 	select a.roleId ,orgids temp_str2 from t_role2dataauth_orgs a where roleid = #{roleId}
+	 </select>
+	 <delete id="deleteRoleDataAuthOrgs" parameterType="String">
+	  	delete from t_role2dataauth_orgs where roleid = #{roleId}
+	 </delete>
+	 <insert id="insertRoleDataAuthOrgs" parameterType="baseModel" >
+	 	insert into t_role2dataauth_orgs(roleid,orgids) values (#{id},#{temp_str2}) 
+	 </insert>
+	 <select id="getTRole2dataauthOrgs" parameterType="String" resultType="TRole2dataauthOrgs"> 
+	 	select * from t_role2dataauth_orgs where roleid =#{roleId,jdbcType=VARCHAR}
+	 </select>	
+	 <select id="getAccountOfRole"  parameterType="String" resultType="Account"> 
+	 	select aa.* from t_account2role ar,t_account aa 
+		where aa.id = ar.accountid and aa.isdeleted='0' and ar.roleid = #{roleId}
+	 </select>
+	 <select id="getRole2Account" parameterType="TRole2Account" resultType="TRole2Account"> 
+	 	select * from t_account2role a where a.roleid = #{roleId,jdbcType=VARCHAR}
+	 </select>
+	 <delete id="deleteRole2Account" parameterType="TRole2Account">
+	 	delete from t_account2role a where a.roleid = #{roleId,jdbcType=VARCHAR}
+	 </delete>
+	 <insert id="insertRole2Account" parameterType="TRole2Account">
+	 	insert into t_account2role(roleid,accountid) values (#{roleId,jdbcType=VARCHAR},#{accountId,jdbcType=VARCHAR})
+	 </insert>
+</mapper>   

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="authoritySql">
+	<select id="authoritys" parameterType="TAuthority" resultType="TAuthority">
+		select * from (
+		select * from t_authority where ( name like  '%'||#{keyWords}||'%' or desp  like  '%'||#{keyWords}||'%')  and isdeleted='0' order by name asc ) 
+		where 1=1  
+	</select>
+	<!-- 删除组织 -->
+	<update id="delete"  parameterType="String">
+		update t_organization set isdeleted='1'  where id = #{id}
+	</update>
+	<select id="getAccountIdByName"  parameterType="String" resultType="account">
+		select * from t_account where isdeleted='0' and logname= #{logName,jdbcType=VARCHAR}
+	</select>
+	<select id="get"  parameterType="String" resultType="tAuthority">
+		select * from t_authority where code = #{code,jdbcType=VARCHAR} and isdeleted='1'
+	</select>
+		
+</mapper>   

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="warnSql"> 
+	<!-- 获取全部预警 -->
+	<select id="all" parameterType="TWarn" resultType="TWarn">
+		select * from t_warn where 1=1 
+		<choose>
+			<when test="result==null or result==''.toString()">
+			 	and result is null
+			</when>
+			<otherwise>
+				and result like '%'||#{result}||'%'				
+			</otherwise>
+		</choose>
+	</select>
+	
+	<update id="update"  parameterType="TWarn">
+		update t_warn set runner=#{runner,jdbcType=VARCHAR},
+		result=#{result,jdbcType=VARCHAR},runtime=sysdate
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+</mapper>   

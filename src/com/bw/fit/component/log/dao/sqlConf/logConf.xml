@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="logSql">
+	<sql id="paginationSql">
+		<![CDATA[ and rn >#{start_num} and rn <= #{end_num} ]]>   
+	</sql>
+	<!-- 增加日志记录 -->
+	<insert id="insert"  parameterType="logInfo">
+		insert into t_loginfo(id,params2,result,creator,createtime,logtype,operatefunction,resourceid,ip,url) values
+	(#{id},#{params,jdbcType=CLOB},#{result,jdbcType=VARCHAR},#{creator,jdbcType=VARCHAR},sysdate,#{logType},#{operateFunction,jdbcType=VARCHAR},
+	#{resourceId,jdbcType=VARCHAR},#{ip,jdbcType=VARCHAR},#{url,jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="get" parameterType="String" resultType="logInfo">
+		select a.id,a.result,a.creator,a.createtime,a.logtype,a.operatefunction,
+		a.resourceid,a.ip,a.url,a.params2 params 
+ 		from t_loginfo a where id = #{id}
+	</select>
+	
+	<select id="getLogs" parameterType="logInfo" resultType="logInfo">
+		select * from (select a.*,rownum rn
+		from t_loginfo a
+		where  1=1  and  a.creator like '%'||#{creator,jdbcType=VARCHAR}||'%'  order by createtime desc 
+		) cc  where 1=1
+		<if test="paginationEnable!='0'.toString()">		
+			<include refid="paginationSql"></include>
+		</if>
+	</select>
+</mapper>   

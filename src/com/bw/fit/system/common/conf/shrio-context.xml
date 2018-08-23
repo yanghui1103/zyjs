@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/task
+	http://www.springframework.org/schema/task/spring-task-4.0.xsd
+	http://www.springframework.org/schema/cache 
+	http://www.springframework.org/schema/cache/spring-cache-4.0.xsd">
+
+	<!-- web.xml中shiro的filter对应的bean -->
+	<!-- Shiro 的Web过滤器 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<!-- loginUrl认证提交地址，如果没有认证将会请求此地址进行认证，请求此地址将由formAuthenticationFilter进行表单认证 -->
+		<property name="loginUrl" value="/system/login" />
+		<!-- 认证成功统一跳转到first.action，建议不配置，shiro认证成功自动到上一个请求路径 -->
+		<property name="successUrl" value="/system/login" />
+		<!-- 通过unauthorizedUrl指定没有权限操作时跳转页面 -->
+		<property name="unauthorizedUrl" value="/common/error/unAuth.jsp" />
+		<!--自定义filter配置 -->
+		<!--<property name="filters"> -->
+		<!-- <map> -->
+		<!-- 将自定义 的FormAuthenticationFilter注入shiroFilter中 -->
+		<!-- <entry key="authc" value-ref="formAuthenticationFilter" /> -->
+		<!-- </map> -->
+		<!-- </property> -->
+		<property name="filterChainDefinitionMap" ref="filterChainDefinitionMap">
+		</property>
+
+	</bean>
+
+	<bean id="filterChainDefinitionMap" factory-bean="filterChainDefinitionMapBuilder"
+		factory-method="buildFilterChainDefinitionmap" />
+	<!-- 使用一个工厂方法来实现 -->
+	<bean id="filterChainDefinitionMapBuilder"
+		class="com.bw.fit.system.common.interceptor.FilterChainDefinitionMapBuilder">
+	</bean>
+
+	<!-- 凭证匹配器 -->
+	<bean id="credentialsMatcher"
+		class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+		<property name="hashAlgorithmName" value="MD5" />
+		<property name="hashIterations" value="10" />
+	</bean>
+	<!-- 配额securityManager -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="verificationRealm" />
+		<property name="sessionMode" value="native" />
+		<!-- 注入缓存管理器 -->
+		<property name="cacheManager" ref="localCacheManager" />
+        <property name="sessionManager" ref="sessionManager"/>
+	</bean>
+	 <!--simpleCookie,不定义在集群环境下会出现There is no session with id ....-->
+    <bean id="simpleCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg name="name" value="custom.session"/>
+        <property name="path" value="/"/>
+    </bean>
+
+    <!--sessionManager-->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+<!--         <property name="sessionDAO" ref="redisSessionDAO"/> -->
+        <property name="sessionIdCookie" ref="simpleCookie"/>
+    </bean>
+	 
+	<bean id="modelAuthricator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
+		<property name="authenticationStrategy">
+			<bean class="org.apache.shiro.authc.pam.AllSuccessfulStrategy">
+			</bean>
+		</property>
+		<property name="realms">
+			<list>
+				<ref bean="verificationRealm" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="verificationRealm" class="com.bw.fit.system.common.interceptor.VerificationRealm">
+		<property name="credentialsMatcher" ref="credentialsMatcher" />
+	</bean>
+
+	<!-- 缓存管理器 -->
+	<bean id="localCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile"
+			value="classpath:com/bw/fit/system/common/conf/shrio-ehcache.xml" />
+	</bean>
+	<aop:config proxy-target-class="true"></aop:config>
+
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
+
+	<!-- <bean -->
+	<!-- class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" -->
+	<!-- depends-on="lifecycleBeanPostProcessor" /> -->
+	<!-- <bean -->
+	<!-- class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"> -->
+	<!-- <property name="securityManager" ref="securityManager" /> -->
+	<!-- </bean> -->
+
+	<!-- 不同的异常到的异常页 -->
+	<!-- <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"> -->
+	<!-- <property name="exceptionMappings"> -->
+	<!-- <props> -->
+	<!-- <prop key="org.apache.shiro.authz.UnauthorizedException">/gotoIFramePage/common/unAuthPage</prop> -->
+	<!-- </props> -->
+	<!-- </property> -->
+	<!-- </bean> -->
+
+</beans> 

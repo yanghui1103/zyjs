@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jobSql">
+	<sql id="paginationSql">
+		<![CDATA[ and rn >#{start_num} and rn <= #{end_num} ]]>   
+	</sql>
+	
+	<select id="all" parameterType="tJob" resultType="tJob">
+		select * from  (
+			select a.*,rownum rn from  t_job a where 1=1 
+		<if test="isValid!=''.toString() and isValid !=null">
+			and isvalid = #{isValid,jdbcType=VARCHAR}
+		</if>	
+		) cc where 1=1 
+		<if test="paginationEnable!='0'.toString()">		
+			<include refid="paginationSql"></include>
+		</if>
+	</select>
+	
+	<select id="get" parameterType="String" resultType="tJob">
+		select * from t_job where id = #{id,jdbcType=VARCHAR}
+	</select>
+</mapper>   

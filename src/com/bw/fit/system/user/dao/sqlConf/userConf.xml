@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userSql">	
+	<sql id="paginationSql">
+		<![CDATA[ and rn >#{start_num} and rn <= #{end_num} ]]>   
+	</sql>
+	<!-- 获取组织信息 -->
+	<select id="getUsers" parameterType="tUser" resultType="tUser">
+		select * from (
+		select a.*,rownum rn from t_user a where name like  '%'||#{keyWords}||'%' and isdeleted='0' order by versionTime desc ) 
+		where 1=1  
+		<if test="paginationEnable!='0'.toString()">		
+			<include refid="paginationSql"></include>
+		</if>
+	</select>
+	
+	<select id="get" parameterType="String" resultType="tUser">
+		select * from t_user where id = #{id}
+	</select>
+	
+	<select id="getByCode" parameterType="String" resultType="tUser">
+		select * from t_user where code = #{code}
+	</select>
+	<insert id="insert"  parameterType="tUser">
+		insert into t_user (id,name,name_pinyin,code,gender,card,type,isvisible,email,phone,address,postcode,isdeleted,creator,createtime,versiontime,createorgid) values
+	(#{id},#{name},#{name_pinyin,jdbcType=VARCHAR}
+	,#{code,jdbcType=VARCHAR}
+	,#{gender,jdbcType=VARCHAR}
+	,#{card,jdbcType=VARCHAR}
+	,#{type,jdbcType=VARCHAR}
+	,#{isVisible,jdbcType=VARCHAR}
+	,#{email,jdbcType=VARCHAR}
+	,#{phone,jdbcType=VARCHAR}
+	,#{address,jdbcType=VARCHAR}
+	,#{postCode,jdbcType=VARCHAR},'0',#{creator,jdbcType=VARCHAR},sysdate,sysdate,#{createOrgId,jdbcType=VARCHAR})
+	</insert>
+	
+	<update id="delete" parameterType="String">
+		update t_user set isdeleted='1' ,versiontime=sysdate where id = #{id}
+	</update>
+</mapper>   

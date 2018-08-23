@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dictSql"> 
+	<select id="getDictByValue" parameterType="string" resultType="dict">
+		select a.fdid id ,a.parent_id parentId,a.dict_name dictName,
+		a.dict_value dictValue,num sortNumber,can_add canAdd,can_edit canEdit,
+		can_del canDel,dict_remark dictRemark ,isdeleted from data_dict  a 
+		where 1=1 and isdeleted='0' and dict_value =  #{value}
+	</select>
+	<select id="getIdByDictValue"  parameterType="string" resultType="string">
+		select fdid from data_dict a where a.dict_value = #{value}
+	</select>
+	
+	<select id="getDictsByParentId" parameterType="string" resultType="dataDict">
+		select a.fdid id,a.parent_id  ,a.dict_name  ,a.dict_value  ,
+		a.dict_remark ,a.num  ,(case can_add when '0' then '否' else '是' end) can_add
+		,(case can_edit when '0' then '否' else '是' end) can_edit
+		,(case can_del when '0' then '否' else '是' end) can_del
+    	from data_dict a
+    	where isdeleted='0'
+    	connect by
+    	a.parent_id =
+    	prior a.fdid
+    	start with a.parent_id = #{parentId}
+	</select>
+	
+	<select id="get" parameterType="String" resultType="dict"> 
+		select a.fdid id,a.parent_id parentId ,a.dict_name dictName ,a.dict_value  dictValue,
+		a.dict_remark dictRemark,a.num  sortNumber,  can_add canAdd
+		,  can_edit canEdit
+		,  can_del canDel
+    	from data_dict a where fdid = #{id}
+	</select>
+	
+	<update id="delete" parameterType="String">
+		update data_dict set isdeleted='1' where fdid = #{id}
+	</update>
+	
+	<!-- 数据字典tree JSON -->
+	<select id="getDataDictList" parameterType="String" resultType="tdataDict">
+		select a.fdid id,a.parent_id,a.dict_name,a.dict_value,a.dict_remark,a.num,(case can_add when '0' then '否' else '是' end) can_add
+		,(case can_edit when '0' then '否' else '是' end) can_edit
+		,(case can_del when '0' then '否' else '是' end) can_del
+    	from data_dict a
+    	where isdeleted='0'
+    	connect by
+    	a.parent_id =
+    	prior a.fdid
+    	start with a.parent_id = #{parent_id}
+	</select>
+	
+	<select id="getDictsByPid" parameterType="String" resultType="tdataDict">
+		select * from data_dict a
+    	where isdeleted='0'  and parent_id = #{parentId}
+	</select>
+	
+	<insert id="insert" parameterType="dict">
+		insert into data_dict (fdid,parent_id,dict_name,dict_value,num,can_add,can_edit,can_del,isdeleted) values
+	(#{id},#{parentId},#{dictName},#{dictValue},#{sortNumber},#{canAdd},#{canEdit},#{canDel},'0')
+	</insert>
+	<update id="update"  parameterType="dict">
+		update data_dict set dict_name=#{dictName},dict_value=#{dictValue},
+		can_add=#{canAdd},can_edit=#{canEdit},can_del=#{canDel} where fdid = #{id}
+	</update>
+</mapper>   

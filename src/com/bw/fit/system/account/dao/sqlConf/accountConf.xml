@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="accountSql">
+	<sql id="paginationSql">
+		<![CDATA[ and rn >#{start_num} and rn <= #{end_num} ]]>   
+	</sql>
+	<select id="getAccountIdByName"  parameterType="String" resultType="account">
+		select * from t_account where isdeleted='0' and logname= #{logName,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getAccount"  parameterType="String" resultType="account">
+		select a.*,u.name,u.name_pinyin,u.card,u.type,u.isvisible,u.email,u.phone,u.address from t_account a,t_user u where
+		1=1 and a.userid = u.code and a.id = #{id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getRolesByAccount"  parameterType="String" resultType="tRole">
+		select r.* from t_account a,t_account2role ar,t_role r
+		where a.id = ar.accountid and ar.roleid = r.id 
+		and r.isdeleted ='0' and a.logname = #{logName}
+	</select>
+		
+	<select id="getOrgByAccount" parameterType="String" resultType="tOrganization">
+		select o.* from t_account2organization ao ,t_organization o ,t_account ac
+		where ao.orgid = o.id and o.isdeleted='0' and ao.accountid  =ac.id and ac.logname = #{logName}
+	</select>	
+	
+	<select id="getAccounts" parameterType="account" resultType="account">
+		select * from (select u.*,a.id temp_str2,a.create_time temp_str3 ,a.isdeleted temp_str1,a.logname,rownum rn
+		from t_account a,t_user u 
+		where u.code = a.userid  and u.isdeleted='0'
+		and  a.logname like '%'||#{logName,jdbcType=VARCHAR}||'%' and  u.name like '%'||#{name,jdbcType=VARCHAR}||'%' 
+		) cc  where 1=1
+		<if test="paginationEnable!='0'.toString()">		
+			<include refid="paginationSql"></include>
+		</if>
+	</select>
+	
+	<update id="delete"  parameterType="account">
+		update t_account set isdeleted='1' where id = #{id}
+	</update>
+	<insert id="insert" parameterType="account">
+		insert into t_account(id,userid,logname,logpwd,creator,create_time,version_time,isdeleted,createorgid)
+		values (#{id},#{userId},#{logName},#{logPwd},#{creator},sysdate,sysdate,'0',#{createOrgId,jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- insertAccount2Position -->
+	<insert id="insertAccount2Position" parameterType="map">
+		insert into t_account2position(accountId,positionId) values (#{accountId},#{positionId})
+	</insert>
+	<insert id="insertAccount2Org" parameterType="map">
+		insert into t_account2organization(accountId,orgId) values (#{accountId},#{orgId})
+	</insert>	
+	<insert id="insertAccount2Role" parameterType="map">
+		insert into t_account2role(accountId,roleid) values (#{accountId},#{roleId})
+	</insert>
+	
+	<select id="getPositionsOfTheAccount"  parameterType="String" resultType="TPosition">
+		select p.* from t_position p,t_account2position ap
+      where ap.positionid = p.id and p.isdeleted='0' 
+      and ap.accountid=#{accountId}
+	</select>
+	
+	<update id="transferAccount" parameterType="account">
+		update account set userid = #{userId,jdbcType=VARCHAR} where id = #{id,jdbcType=VARCHAR}
+	</update>
+</mapper>   

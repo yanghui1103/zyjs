@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/task
+	http://www.springframework.org/schema/task/spring-task-4.0.xsd
+	http://www.springframework.org/schema/cache 
+	http://www.springframework.org/schema/cache/spring-cache-4.0.xsd">
+
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter" />
+			<bean
+				class="org.springframework.http.converter.ResourceHttpMessageConverter" />
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!-- 设置使用注解的类所在的jar包 -->
+	<context:component-scan base-package="com.bw.fit"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
+	<!-- 完成请求和注解POJO的映射 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+
+	<!-- 定义JSP视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewNames" value="*Page*" />
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+		<property name="order" value="0"></property>
+	</bean>
+
+<!--  	<bean id="viewResolver" -->
+<!--         class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"> -->
+<!--         <property name="exposeRequestAttributes" value="true" /> -->
+<!--         <property name="exposeSessionAttributes" value="true" /> -->
+<!--         <property name="viewClass"> -->
+<!--             <value>org.springframework.web.servlet.view.freemarker.FreeMarkerView -->
+<!--             </value> -->
+<!--         </property> -->
+<!--         <property name="cache"> -->
+<!--             <value>true</value> -->
+<!--         </property> -->
+<!--         <property name="suffix"> -->
+<!--             <value>.html</value> -->
+<!--         </property> -->
+<!--         <property name="contentType"> -->
+<!--             <value>text/html; charset=UTF-8</value> -->
+<!--         </property> -->
+<!--     </bean> -->
+
+<!--     <bean id="freemarkerConfig" -->
+<!--         class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer"> -->
+<!--         <property name="templateLoaderPath"> -->
+<!--             <value>/WEB-INF/html/</value> -->
+<!--         </property> -->
+<!--         <property name="freemarkerSettings"> -->
+<!--             <props> -->
+<!--                 <prop key="locale">zh_CN</prop> -->
+<!--                 <prop key="defaultEncoding">UTF-8</prop> -->
+<!--             </props> -->
+<!--         </property> -->
+<!--     </bean> -->
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />  
+
+
+</beans>

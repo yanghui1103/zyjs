@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="positionSql"> 
+	<sql id="paginationSql">
+		<![CDATA[ and rn >#{start_num} and rn <= #{end_num} ]]>   
+	</sql>
+	<!-- 获取岗位信息 -->
+	<select id="getPositions" parameterType="map" resultType="Position">
+		select * from 
+		( select p.*,rownum rn from t_position p,T_ORGANIZATION2POSITION op where OP.ORGID=#{orgId} and OP.POSITIONID=p.id and p.isdeleted='0' order by createtime desc )
+		where 1=1  
+		<if test="paginationEnable!='0'.toString()">		
+			<include refid="paginationSql"></include>
+		</if>
+	</select>
+	<!-- 根据岗位ID获取所属组织 -->
+	<select id="getOrgsByPositionId" parameterType="string" resultType="Organization">
+		select o.* from t_organization2position op,t_organization o where o.isdeleted = '0' and o.id=OP.ORGID and positionId = #{positionId} ORDER BY o.SORTNUMBER
+	</select>
+	
+	<!-- 根据组织ID获取岗位列表 -->
+	<select id="getPositionByOrgId" parameterType="string" resultType="Position">
+		select p.*from t_organization2position op,T_POSITION p
+		where p.id=OP.POSITIONID and OP.ORGID = #{orgId} ORDER BY p.SORTNUMBER
+	</select>
+	
+	<select id="get" parameterType="string" resultType="Position">
+		select * from t_position where id = #{id}
+	</select>
+	
+	<select id="checkO2P" parameterType="string" resultType="TOrganization2Position">
+		select * from t_organization2position where POSITIONID = #{id}
+	</select>
+	
+	<insert id="insert"  parameterType="Position">
+		insert into t_position(id,name,code,simpleName,isdeleted,
+		creator,createtime,sortnumber,versiontime,createorgid) values
+		(#{id},#{name,jdbcType=VARCHAR},#{code},#{simpleName,jdbcType=VARCHAR},'0',
+		#{creator,jdbcType=VARCHAR},sysdate,#{sortNumber,jdbcType=INTEGER},sysdate,#{createOrgId,jdbcType=VARCHAR})
+	</insert>
+	
+	<insert id="insertOrg2Position"  parameterType="TOrganization2Position">
+		insert into t_organization2position(orgId,positionId) values
+		(#{orgId},#{positionId})
+	</insert>
+	
+	<update id="update"  parameterType="Position">
+		update t_position set name=#{name,jdbcType=VARCHAR},code=#{code},
+		simpleName=#{simpleName,jdbcType=VARCHAR},sortnumber=#{sortNumber,jdbcType=INTEGER},
+		versiontime=sysdate where id = #{id}
+	</update>
+	<!-- 删除组织 -->
+	<update id="delete"  parameterType="String">
+		update t_position set isdeleted='1'  where id = #{id}
+	</update>
+	<delete id="deleteO2P"  parameterType="map">
+		delete from t_organization2position where positionId = #{id} and orgId = #{orgId}
+	</delete>
+	<delete id="deleteO2PByPid"  parameterType="String">
+		delete from t_organization2position where positionId = #{id}
+	</delete>
+</mapper>   

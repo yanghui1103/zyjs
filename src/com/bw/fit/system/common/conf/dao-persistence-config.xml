@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+       <setting name="cacheEnabled" value="true" />
+       <setting name="multipleResultSetsEnabled" value="true" />
+       <setting name="useColumnLabel" value="true" />
+       <setting name="defaultExecutorType" value="REUSE" />
+       <setting name="localCacheScope" value="SESSION"/>  
+    </settings>     
+    <typeAliases>
+    	<package name="com.bw.fit.system.organization.entity"/> 
+    	<package name="com.bw.fit.system.organization.model"/> 
+    	<package name="com.bw.fit.component.log.entity"/> 
+    	<package name="com.bw.fit.component.log.model"/> 
+    	<package name="com.bw.fit.component.warn.entity"/> 
+    	<package name="com.bw.fit.component.job.entity"/> 
+    	<package name="com.bw.fit.system.organization.model"/> 
+    	<package name="com.bw.fit.system.account.model"/> 
+    	<package name="com.bw.fit.system.common.model"/> 
+    	<package name="com.bw.fit.system.position.model"/> 
+    	<package name="com.bw.fit.system.position.entity"/> 
+    	<package name="com.bw.fit.system.address.entity"/> 
+    	<package name="com.bw.fit.system.common.entity"/> 
+    	<package name="com.bw.fit.system.dict.entity"/> 
+    	<package name="com.bw.fit.system.dict.model"/> 
+    	<package name="com.bw.fit.system.user.entity"/> 
+    	<package name="com.bw.fit.system.user.model"/> 
+    	<package name="com.bw.fit.system.authority.entity"/> 
+    	<package name="com.bw.fit.system.authority.model"/> 
+    	<package name="com.bw.fit.system.role.entity"/> 
+    	<package name="com.bw.fit.system.role.model"/> 
+    	<package name="com.bw.fit.system.menu.model"/> 
+    	<package name="com.bw.fit.zyjs.company.entity"/>
+    </typeAliases>
+</configuration>

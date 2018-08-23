@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="menuSql"> 
+	<sql id="paginationSql">
+		<![CDATA[ and rn >#{start_num} and rn <= #{end_num} ]]>   
+	</sql>
+	
+	<select id="getMenus" parameterType="menu" resultType="menu">
+		select * from t_menu a where a.isdeleted='0'
+	</select>
+	<select id="getMyRole2Menus" parameterType="String" resultType="menu">
+		select m.*  from t_menu m ,t_role2menu rm where rm.menuid = m.id and m.isdeleted='0'
+		and rm.roleid = #{roleId}
+	</select>
+	
+</mapper>   

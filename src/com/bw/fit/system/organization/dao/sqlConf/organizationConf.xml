@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="organizationSql"> 
+	<sql id="paginationSql">
+		<![CDATA[ and rn >#{start_num} and rn <= #{end_num} ]]>   
+	</sql>
+	<!-- 获取组织信息 -->
+	<select id="getOrganizations" parameterType="Organization" resultType="Organization">
+		select * from (
+		select a.*,rownum rn from t_organization a where name like  '%'||#{keyWords}||'%' and isdeleted='0' order by createtime desc ) 
+		where 1=1  
+		<if test="paginationEnable!='0'.toString()">		
+			<include refid="paginationSql"></include>
+		</if>
+	</select>
+	<!-- 删除组织 -->
+	<update id="delete"  parameterType="String">
+		update t_organization set isdeleted='1',versionTime=sysdate  where id = #{id}
+	</update>
+	<select id="get" parameterType="string" resultType="Organization">
+		select * from t_organization where id = #{id}
+	</select>
+	<insert id="insert" parameterType="Organization">
+		insert into t_organization (id,name,code,simplename,parentid,type,isvisible,adminer,phone,address,postcode,summary,isdeleted
+		,creator,createtime,sortnumber,versiontime,createorgid ) values 
+		(#{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{code,jdbcType=VARCHAR},#{simpleName,jdbcType=VARCHAR},#{parentId,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR},#{isVisible,jdbcType=VARCHAR},#{adminer,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR},#{postCode,jdbcType=VARCHAR},#{summary,jdbcType=VARCHAR},'0'
+		,#{creator,jdbcType=VARCHAR},sysdate,#{sortNumber,jdbcType=INTEGER},sysdate,#{createOrgId,jdbcType=VARCHAR} )
+	</insert>
+		
+		
+	<select id="getChildrenAndCurt" parameterType="string" resultType="Organization">
+		select a.* from t_organization a  where isdeleted='0'
+       connect by a.parentid = prior a.id start with a.parentid = #{cuurentOrgId}
+       union  select a.*  from      t_organization a where id = #{cuurentOrgId}
+	</select>	
+	
+	<select id="getParentsAndCurt" parameterType="string" resultType="Organization">
+		select a.* from t_organization a
+      	where isdeleted='0'
+      	connect by
+    	a.id =
+    	prior a.parentid
+    	start with a.id =#{cuurentOrgId}
+	</select>
+</mapper>   

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/task
+	http://www.springframework.org/schema/task/spring-task-4.0.xsd">
+	<!-- 实施配置总入口 -->
+	<context:property-placeholder
+		location="file:D:/eclipse/workspace_zyjs/fitImplementConf.properties" /> 
+		
+	<!-- 配置c3p0数据源 class="com.mchange.v2.c3p0.ComboPooledDataSource" -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driverClassName}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="maxIdleTime" value="${jdbc.maxIdleTime}"></property>
+		<property name="acquireIncrement" value="${jdbc.acquireIncrement}"></property>
+		<property name="maxPoolSize" value="${jdbc.maxPoolSize}"></property>
+		<property name="minPoolSize" value="${jdbc.minPoolSize}"></property>
+		<property name="initialPoolSize" value="${jdbc.initialPoolSize}"></property>
+		<property name="maxStatements" value="${jdbc.maxStatements}"></property>
+		<property name="acquireRetryAttempts" value="${jdbc.acquireRetryAttempts}"></property>
+		<property name="breakAfterAcquireFailure" value="${jdbc.breakAfterAcquireFailure}"></property>
+		<property name="preferredTestQuery" value="${jdbc.validationQuery}"></property>
+	</bean>
+	<!-- 配置mybitasSqlSessionFactoryBean -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation"
+			value="classpath:com/bw/fit/system/common/conf/dao-persistence-config.xml"></property>
+		<property name="mapperLocations" >
+			<list>
+				<value>classpath:com/bw/fit/*/*/dao/sqlConf/*Conf.xml</value>
+			</list>
+		</property>	
+	</bean>
+
+	<!-- 配置SqlSessionTemplate -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 使用tx/aop来配置 -->
+	<aop:config>
+		<!-- 通过aop定义事务增强切面 -->
+		<aop:pointcut id="serviceMethod"
+			expression="execution(* com.bw.fit.*.*.service.impl.*.*(..))" />
+		<!-- 引用事务增强 -->
+		<aop:advisor pointcut-ref="serviceMethod" advice-ref="txAdvice" />
+	</aop:config>
+	<aop:config>
+		<!-- 通过aop定义事务增强切面 -->
+		<aop:pointcut id="daoMethod"
+			expression="execution(* com.bw.fit.*.*.dao.impl.*.*(..))" />
+		<!-- 引用事务增强 -->
+		<aop:advisor pointcut-ref="daoMethod" advice-ref="txAdvice" />
+	</aop:config>
+
+	<!--事务增强 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<!-- 事务属性定义 -->
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="save*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="create*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="insert*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="edit*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="del*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="roll*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="start*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="suspend*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+</beans> 

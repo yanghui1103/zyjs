@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<!-- <distributable /> 允许分布式处理 -->
+	<!-- 该servlet为tomcat,jetty等容器提供,将静态资源映射从/改为/static/目录，如原来访问 http://localhost/foo.css 
+		,现在http://localhost/static/foo.css -->
+	<!-- 不拦截静态文件 -->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/themes/*</url-pattern>
+		<url-pattern>/common/*</url-pattern> 
+		<url-pattern>/js/*</url-pattern>
+		<url-pattern>/plugins/*</url-pattern>
+		<url-pattern>/upLoadFiles/*</url-pattern>
+	</servlet-mapping>
+	<!-- Spring 刷新Introspector防止内存泄露 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+		
+	<!-- session建立和销毁,都被此处拦截并进行增删 -->
+	<listener>
+		<listener-class>com.bw.fit.system.common.listenter.MultiSessionListener</listener-class>
+	</listener>
+	<listener>  
+        <listener-class>  
+            org.springframework.web.context.request.RequestContextListener  
+        </listener-class>  
+	</listener>
+		
+	<!-- 配置字符集 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	
+	<filter>
+		<filter-name>IllegalStringFilter</filter-name>
+		<filter-class>com.bw.fit.system.common.interceptor.StringFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>IllegalStringFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- RestFul API时候用 -->
+	<filter>
+    	<filter-name>hiddenHttpMethodFilter</filter-name>
+    	<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	</filter>
+	<filter-mapping>
+    	<filter-name>hiddenHttpMethodFilter</filter-name>
+    	<servlet-name>springMVC</servlet-name>
+	</filter-mapping>
+
+	
+	<!-- shiro的filter -->
+	<!-- shiro过虑器，DelegatingFilterProxy通过代理模式将spring容器中的bean和filter关联起来 -->
+	<filter>
+		<filter-name>shiroFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetFilterLifecycle</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>shiroFilter</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>shiroFilter</filter-name>
+		<url-pattern>/*</url-pattern> 
+	</filter-mapping>
+
+	<!-- 初始化 DispatcherServlet时，该框架在 web应用程序WEB-INF目录中寻找一个名为[servlet-名称]-servlet.xml的文件， 
+		并在那里定义相关的Beans，重写在全局中定义的任何Beans -->
+	<servlet>
+		<servlet-name>springMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:com/bw/fit/system/common/conf/*-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
+		<multipart-config>
+			<max-file-size>20848820</max-file-size>
+			<max-request-size>4180188410</max-request-size>
+			<file-size-threshold>1048576</file-size-threshold>
+		</multipart-config>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springMVC</servlet-name>
+		<!-- 所有的的请求，都会被DispatcherServlet处理 -->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:com/bw/fit/system/common/conf/*-context.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/common/error/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/common/error/500.jsp</location>
+	</error-page>
+
+	<session-config>
+		<session-timeout>-1</session-timeout>
+	</session-config>
+
+	<welcome-file-list>
+		<welcome-file>/WEB-INF/jsp/system/common/autoLogin.jsp</welcome-file>
+	</welcome-file-list>
+
+
+	<servlet>
+		<description>输出验证码</description>
+		<servlet-name>VerificationCode</servlet-name>
+		<servlet-class>com.bw.fit.common.servlet.VerificationCodeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>VerificationCode</servlet-name>
+		<url-pattern>/getCheckCode</url-pattern>
+	</servlet-mapping>
+	
+	
+	<!-- log4j -->
+	<context-param>
+  		<param-name>log4jConfigLocation</param-name>
+  		<param-value>classpath:com/bw/fit/system/common/conf/log4j.xml</param-value>
+	</context-param>
+
+	<!-- 配置log4j.xml变量 -->
+	<context-param>
+		<param-name>rootLevel</param-name>
+		<param-value>DEBUG</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>loggingLevel</param-name>
+		<param-value>INFO</param-value>
+	</context-param>
+	<!-- 配置log4j.xml监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+
+	<jsp-config>
+		<jsp-property-group>
+			<display-name>JSPConfiguration</display-name>
+			<el-ignored>false</el-ignored>
+		</jsp-property-group>
+	</jsp-config>
+</web-app>
