@@ -49,7 +49,7 @@ public class EstaServiceImpl implements EstaService {
 			String tableName = estaDao.getExtenalType(id);
 			estaDao.updateExtenalUserStatus(id, "0", tableName);
 			json.put("res", "2");
-			json.put("msg", "禁用成功");
+			json.put("msg", "启用成功");
 		} catch (RbackException e) {
 			json = new JSONObject();
 			json.put("res", "1");

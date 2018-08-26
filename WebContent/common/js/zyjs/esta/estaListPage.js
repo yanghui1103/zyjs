@@ -11,7 +11,7 @@ function estalistquery(){
 	$('#estalistDg').datagrid({ 
 		pagination:true,
 		method:"get",
-	    url:ctx+'esta/estas' ,   
+	    url:ctx+'esta/estas/'+$("#area").val() ,   
         queryParams:   serializeFormToJSON($("#estalistFM").serializeArray()),
 	    remoteSort: false, 
         columns: [[

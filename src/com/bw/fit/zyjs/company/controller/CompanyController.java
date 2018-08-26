@@ -10,12 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bw.fit.system.common.controller.BaseController;
 import com.bw.fit.system.common.model.RbackException;
+import com.bw.fit.system.common.util.PubFun;
 import com.bw.fit.zyjs.company.dao.EstaDao;
 import com.bw.fit.zyjs.company.entity.TEsta;
 import com.bw.fit.zyjs.company.service.EstaService;
@@ -31,19 +33,19 @@ public class CompanyController extends BaseController {
 	
 	@RequestMapping("estas/{area}")
 	@ResponseBody
-	public JSONObject estas(@PathVariable String area){
-		JSONObject json = new JSONObject();
+	public JSONArray estas(@PathVariable String area,@RequestParam(value="keyWords") String keyWords){
 		TEsta te = new TEsta();
 		te.setArea(area);
+		te.setKeyWords(keyWords);
 		List<TEsta> tes = estaDao.selectAll(te);
-		if(tes !=null && tes.size()>0){
-			json.put("res", "2");
-			json.put("list", JSONArray.toJSON(tes));
-		}else{
-			json.put("res", "1");
-			json.put("msg", "无数据");
+		for(TEsta t:tes){
+			t.setIsdeleted(PubFun.transIsdeleted(t.getIsdeleted()));
 		}
-		return json  ;
+		if(tes !=null && tes.size()>0){
+			return (JSONArray) JSONArray.toJSON(tes);
+		}else{
+			return null ;
+		}
 	}
 	
 	@RequestMapping("gotoEstas/{area}")

@@ -13,6 +13,7 @@ import com.bw.fit.system.common.dao.DaoTemplete;
 import com.bw.fit.system.common.model.RbackException;
 import com.bw.fit.zyjs.company.dao.EstaDao;
 import com.bw.fit.zyjs.company.entity.TEsta;
+import com.github.pagehelper.PageHelper;
 @Repository
 public class EstaDaoImpl implements EstaDao {
 	@Autowired
@@ -20,6 +21,7 @@ public class EstaDaoImpl implements EstaDao {
 	
 	@Override
 	public List<TEsta> selectAll(TEsta te) {
+		PageHelper.startPage(te.getPage(), te.getRows()); 
 		return daoTemplete.getListData("estaSql.selectAll", te);
 	}
 

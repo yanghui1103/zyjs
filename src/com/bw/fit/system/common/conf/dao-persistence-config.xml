@@ -33,5 +33,8 @@
     	<package name="com.bw.fit.system.role.model"/> 
     	<package name="com.bw.fit.system.menu.model"/> 
     	<package name="com.bw.fit.zyjs.company.entity"/>
+    	<package name="com.bw.fit.zyjs.hunter.entity"/>
+    	
+    	
     </typeAliases>
 </configuration>

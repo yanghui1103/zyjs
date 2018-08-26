@@ -10,9 +10,9 @@
 		select * from (select tc.id,'企业' temp_str1,tc.email phone,tc.createtime,tc.name,isdeleted,area from t_company tc
 		union all
 		select ta.id,'个人' temp_str1,ta.phone,ta.createtime,'' name,isdeleted,area from t_person ta ) a
-		where 1=1 and a.name like '%'||#{keyWords,jdbcType=VARCHAR}||'%' 
+		where 1=1 and ( a.name like '%'||#{keyWords,jdbcType=VARCHAR}||'%' 
 		or a.phone  like '%'||#{keyWords,jdbcType=VARCHAR}||'%'
-		or a.temp_str1  like '%'||#{keyWords,jdbcType=VARCHAR}||'%'
+		or a.temp_str1  like '%'||#{keyWords,jdbcType=VARCHAR}||'%' )
 		<include refid="areaSql" />
 	</select>
 	
@@ -36,7 +36,7 @@
 		update  ${tableName}  set password = #{pwd,jdbcType=VARCHAR} where id = #{id,jdbcType=VARCHAR}
 	</update>
 	
-	<select id="getSubject" resultType="String" resultType="TEsta">
+	<select id="getSubject" parameterType="String" resultType="TEsta">
 		select * from (select tc.id,'company' temp_str1,tc.email phone,tc.createtime,tc.name,isdeleted,area,tc.password from t_company tc
     	union all
     	select ta.id,'person' temp_str1,ta.phone,ta.createtime,'' name,isdeleted,area,ta.password from t_person ta ) a

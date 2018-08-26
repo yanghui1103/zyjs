@@ -320,6 +320,15 @@ public class PubFun {
 	}
 
 
+	public static String transIsdeleted(String isdeleted){
+		if("0".equals(isdeleted)){
+			return "有效";
+		}else if("1".equals(isdeleted)){
+			return "禁用/失效";
+		}else{
+			return "未知状态";
+		}
+	}
 
 	public static String getMACAddress(String ip) {
 		String str = "";
