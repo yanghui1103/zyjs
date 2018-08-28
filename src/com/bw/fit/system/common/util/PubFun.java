@@ -508,11 +508,13 @@ public class PubFun {
 
 	public static void copyProperties(Object dest, Object orig) {
 		try {
-			ConvertUtils
-					.register(new DateConverter(), java.util.Date.class);
-			BeanUtils.copyProperties(dest, orig);
+			ConvertUtils.register(new DateConverter(), java.util.Date.class);
+			if(orig !=null){
+				BeanUtils.copyProperties(dest, orig);
+			}else{
+				dest = null ;
+			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

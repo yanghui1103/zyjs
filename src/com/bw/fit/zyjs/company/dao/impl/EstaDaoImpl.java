@@ -61,4 +61,9 @@ public class EstaDaoImpl implements EstaDao {
 		return (TEsta)daoTemplete.getOneData("estaSql.getSubject", id);
 	}
 
+	@Override
+	public TEsta getOne(String id) {
+		return (TEsta)daoTemplete.getOneData("estaSql.getOne", id);
+	}
+
 }

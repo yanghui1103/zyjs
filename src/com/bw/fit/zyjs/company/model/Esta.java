@@ -1,8 +1,8 @@
-package com.bw.fit.zyjs.company.entity;
+package com.bw.fit.zyjs.company.model;
 
-import com.bw.fit.system.common.entity.BaseEntity;
+import com.bw.fit.system.common.model.BaseModel;
 
-public class TEsta extends BaseEntity {
+public class Esta extends BaseModel {
 
 	private String name ;
 	private String email;
@@ -34,12 +34,6 @@ public class TEsta extends BaseEntity {
 	}
 	public void setAddress(String address) {
 		this.address = address;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
 	}
 	public String getName() {
 		return name;
@@ -77,5 +71,12 @@ public class TEsta extends BaseEntity {
 	public void setIndustry(String industry) {
 		this.industry = industry;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 
 }

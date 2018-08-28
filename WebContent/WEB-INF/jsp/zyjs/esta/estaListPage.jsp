@@ -26,7 +26,7 @@
 </head> 
 <body>
 	   
-      <div id="tb" style="padding:0 30px;">
+      <div id="tb" style="padding:0 5px;">
 		<form id="estalistFM">
         	关键词: <input class="easyui-textbox" type="text" name="keyWords" style="width:166px;height:35px;line-height:35px;"></input>
         	<a href="javascript:estaReloadgrid();" class="easyui-linkbutton" iconCls="icon-search" data-options="selected:true">查询</a> 
@@ -36,6 +36,7 @@
         </form>
         	<input name="area" id="area" value="${area }" type="hidden">
       </div>
+      <div id="_loadDialog_estalist"></div>
        <table id="estalistDg" style="width:100%;height:480px;" >
         </table>
 </body> 

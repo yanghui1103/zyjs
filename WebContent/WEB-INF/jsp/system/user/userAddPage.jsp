@@ -20,7 +20,6 @@
 	<div style="margin:30px 0px;"></div>
 	<form id="userAddFm"  class="easyui-form" method="post"
 		data-options="novalidate:false">
-		
 		<div style="margin-bottom: 20px;margin-left: 90px">  
 			<div>姓名</div>
 			<input class="easyui-textbox"  name="name" style="width: 80%;paddding-right:2px"  

@@ -5,4 +5,4 @@
  * @author yangh
  *
  */
-package com.bw.fit.zyjs.company.model;
+package com.bw.fit.zyjs.audit.service.impl;

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="auditSql"> 
+
+	<select id="getAddressByOrgId" parameterType="map" resultType="VAddress">
+		select * from V_ADDRESS where ADDRESSTYPE = #{addressType} and UNDERORGID = #{underOrgId}
+	</select>
+	
+	<select id="getAddressByKey" parameterType="map" resultType="VAddress">
+		select * from V_ADDRESS where ADDRESSTYPE = #{addressType} and NAME like '%'||#{keyWords}||'%'
+	</select>
+	
+	<select id="get" parameterType="string" resultType="VAddress">
+		select * from V_ADDRESS where id = #{id}
+	</select>
+	
+	<insert id="create" parameterType="tAudit" >
+		insert into t_audit (id,foreignid,code,remark,creator,createtime) values (
+		#{id},#{foreignId},#{code,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},
+		#{creator,jdbcType=VARCHAR}, sysdate)
+	</insert>
+</mapper>   

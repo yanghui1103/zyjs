@@ -14,8 +14,16 @@ public class Hunter extends BaseModel {
 	private String netUrl;
 	private String cardId;
 	private String introduction ;
+	private String phone;
 	
 	
+	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public String getEmail() {
 		return email;
 	}

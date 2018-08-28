@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bw.fit.system.common.dao.DaoTemplete;
+import com.bw.fit.system.common.model.RbackException;
 import com.bw.fit.zyjs.hunter.dao.HunterDao;
 import com.bw.fit.zyjs.hunter.entity.THunter;
 @Repository
@@ -21,6 +22,11 @@ public class HunterDaoImpl implements HunterDao {
 	@Override
 	public List<THunter> selectAll(THunter th) {
 		return daoTemplete.getListData("hunterSql.selectAll", th);
+	}
+
+	@Override
+	public void update(THunter hunter) throws RbackException {
+		daoTemplete.update("hunterSql.update", hunter);
 	}
 	
 

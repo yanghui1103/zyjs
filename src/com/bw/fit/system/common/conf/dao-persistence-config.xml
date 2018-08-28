@@ -34,6 +34,8 @@
     	<package name="com.bw.fit.system.menu.model"/> 
     	<package name="com.bw.fit.zyjs.company.entity"/>
     	<package name="com.bw.fit.zyjs.hunter.entity"/>
+    	<package name="com.bw.fit.zyjs.person.entity"/>
+    	<package name="com.bw.fit.zyjs.audit.entity"/>
     	
     	
     </typeAliases>

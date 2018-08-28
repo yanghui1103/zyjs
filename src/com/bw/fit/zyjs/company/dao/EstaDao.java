@@ -40,4 +40,10 @@ public interface EstaDao {
 	 * @return
 	 */
 	public TEsta getSubject(String id);
+	/****
+	 * 获取企业
+	 * @param id
+	 * @return
+	 */
+	public TEsta getOne(String id);
 }

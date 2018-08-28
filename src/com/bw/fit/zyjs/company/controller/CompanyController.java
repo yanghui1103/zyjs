@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.bw.fit.system.common.controller.BaseController;
 import com.bw.fit.system.common.model.RbackException;
 import com.bw.fit.system.common.util.PubFun;
+import com.bw.fit.system.dict.service.DictService;
 import com.bw.fit.zyjs.company.dao.EstaDao;
 import com.bw.fit.zyjs.company.entity.TEsta;
 import com.bw.fit.zyjs.company.service.EstaService;
@@ -30,6 +31,8 @@ public class CompanyController extends BaseController {
 	private EstaDao estaDao;
 	@Autowired
 	private EstaService estaService;
+	@Autowired
+	private DictService dictService;
 	
 	@RequestMapping("estas/{area}")
 	@ResponseBody
@@ -69,6 +72,16 @@ public class CompanyController extends BaseController {
 		JSONObject json = new JSONObject();
 		json = estaService.startExtenalUser(id);
 		return json  ;
+	}
+	
+	@RequestMapping(value="gotoDetail/{id}")
+	public String gotodetail(@PathVariable String id,Model model){
+		TEsta te = estaDao.getOne(id);
+		te.setIndustry(dictService.getDictByValue(te.getIndustry()).getDictName());
+		te.setScale(dictService.getDictByValue(te.getScale()).getDictName());
+		te.setCompType(dictService.getDictByValue(te.getCompType()).getDictName());
+		model.addAttribute("esta", te);
+		return "zyjs/esta/estaDetailPage";
 	}
 	
 	@RequestMapping(value ="password/{id}",method=RequestMethod.PUT)

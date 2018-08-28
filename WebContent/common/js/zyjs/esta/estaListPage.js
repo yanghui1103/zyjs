@@ -33,7 +33,7 @@ function estalistquery(){
              pageList: [ 10,20, 30, 40, 50],
              striped: true, //奇偶行是否区分                 
              onDblClickRow: function (index, row) {  
-            	 openUserDetail(row.id); 
+            	 openExUserDetail(row.id,row.temp_str1); 
              }     
 	});  
 }
@@ -49,17 +49,30 @@ function estaReloadgrid() {
 }  
 
 
-function openUserDetail(id){
-	$('#_loadDialog_accountlist').dialog({    
-	    title: '用户详情',    
-	    width: 800,    
-	    height: 500,    
-	    closed: false,    
-	    cache: false,    
-	    maximizable:true,
-	    href: ctx+'user/openUserDetail/'+id,    
-	    modal: true   
-	}); 	
+function openExUserDetail(id,type){
+	if(type == '企业'){
+		$('#_loadDialog_estalist').dialog({    
+		    title: '外部用户详情',    
+		    width: 800,    
+		    height: 500,    
+		    closed: false,    
+		    cache: false,    
+		    maximizable:true,
+		    href: ctx+'esta/gotoDetail/'+id,    
+		    modal: true   
+		}); 	
+	}else{
+		$('#_loadDialog_estalist').dialog({    
+		    title: '外部用户详情',    
+		    width: 800,    
+		    height: 500,    
+		    closed: false,    
+		    cache: false,    
+		    maximizable:true,
+		    href: ctx+'person/person/'+id,    
+		    modal: true   
+		}); 	
+	}
 }
 
 

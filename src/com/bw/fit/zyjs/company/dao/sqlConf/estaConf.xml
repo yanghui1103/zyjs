@@ -32,6 +32,10 @@
 		select ta.id,'个人' temp_str1,ta.phone,ta.createtime,'' name,isdeleted,area from t_person ta ) a where a.id = #{id,jdbcType=VARCHAR}
 	</select>
 	
+	<select id="getOne" parameterType="string" resultType="TEsta">
+		select * from t_company a where a.id = #{id,jdbcType=VARCHAR}
+	</select>
+	
 	<update id="initPasswd" parameterType="map"> 
 		update  ${tableName}  set password = #{pwd,jdbcType=VARCHAR} where id = #{id,jdbcType=VARCHAR}
 	</update>
