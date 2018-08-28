@@ -55,24 +55,12 @@
 			</tbody>
 		</table>
 	</div>
-	<form id="hunterAudit">
+	<form id="hunterblack">
 		<div style="margin-bottom: 20px; margin-left: 5px">
 			<div>审核结果</div>
-			<select class="easyui-combogrid" name="code" editable="false"
-				style="width: 30%"
-				data-options="limitToList:true,
-					panelWidth: 200,
-					idField: 'dict_value',
-					textField: 'dict_name',
-					url: '<%=basePath%>dict/getDictsByParentValue/datastatus',
-					method: 'get', 
-					columns: [[
-						{field:'dict_value',title:'值',width:50},
-						{field:'dict_name',title:'名称',width:140} 
-					]],
-					fitColumns: true, 
-					required:true
-				">
+			<select  name="code"  >
+				<option value="1">进入黑名单</option>
+				<option value="0">退出黑名单</option>
 			</select>
 		</div>
 		<div style="margin-bottom: 20px; margin-left: 5px">
@@ -82,15 +70,14 @@
 				data-options="required:true,validType:['length[0,30]']">
 		</div>
 		<input name="foreignId" value="${hunter.id }" type="hidden">
-		<input name="_method" value=PUT" type="hidden">
 	</form>
 	<script type="text/javascript">
 		function addAuditHunter() {
-			promptMessageCallBack("3", "是否确认？", function() {
+			promptMessageCallBack("3", "是否确认此操作？", function() {
 				$.ajax({
-					type : 'PUT',
-					url : ctx + "hunter/audit",
-					data : ($("#hunterAudit").serialize()),
+					type : 'POST',
+					url : ctx + "hunter/black",
+					data : ($("#hunterblack").serialize()),
 					success : function(data) {
 						promptMessage(data.res, data.msg);
 					},

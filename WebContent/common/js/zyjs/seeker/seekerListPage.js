@@ -3,15 +3,15 @@
  */
 
 $(function() {
-	hunterlistquery();
+	seekerlistquery();
 });
 
-function hunterlistquery() {
-	$('#hunterlistDg').datagrid({
+function seekerlistquery() {
+	$('#seekerlistDg').datagrid({
 		pagination : true,
 		method : "get",
-		url : ctx + 'hunter/hunters/' + $("#hunterlistFMarea").val(),
-		queryParams : serializeFormToJSON($("#hunterlistFM").serializeArray()),
+		url : ctx + 'seeker/seekers/' + $("#seekerlistFMarea").val(),
+		queryParams : serializeFormToJSON($("#seekerlistFM").serializeArray()),
 		remoteSort : false,
 		columns : [ [ {
 			field : 'id',
@@ -22,23 +22,23 @@ function hunterlistquery() {
 			width : '20%',
 			fixed : true
 		}, {
-			field : 'compType',
-			title : '性质',
+			field : 'education',
+			title : '学历',
 			width : '20%'
 		}, {
-			field : 'industry',
-			title : '行业',
+			field : 'cardId',
+			title : '身份证',
 			width : '20%'
 		}, {
-			field : 'scale',
-			title : '规模',
+			field : 'email',
+			title : 'email',
 			width : '10%'
 		}, {
 			field : 'createTime',
 			title : '转招聘方时间',
 			width : '20%'
 		}, {
-			field : 'status',
+			field : '意向工作地',
 			title : '状态',
 			width : '10%'
 		} ] ],
@@ -57,45 +57,45 @@ function hunterlistquery() {
 }
 
 // 增加查询参数，在页面加载时运行
-function hunterReloadgrid() {
-	$('#hunterlistDg').datagrid('loadData', {
+function seekerReloadgrid() {
+	$('#seekerlistDg').datagrid('loadData', {
 		total : 0,
 		rows : []
 	}); // 清空DataGrid行数据
-	$('#hunterlistDg').datagrid('options').queryParams = serializeFormToJSON($(
-			"#hunterlistFM").serializeArray());
-	$("#hunterlistDg").datagrid('reload');
+	$('#seekerlistDg').datagrid('options').queryParams = serializeFormToJSON($(
+			"#seekerlistFM").serializeArray());
+	$("#seekerlistDg").datagrid('reload');
 }
 
-function openAuditHunter() {
-	var row = getSingleTreeGridSelectData($("#hunterlistDg"));
+function openAuditseeker() {
+	var row = getSingleTreeGridSelectData($("#seekerlistDg"));
 	if (row != null) {
 		var id = row.id;
-		$('#_loadDialog_hunterlist').dialog({
+		$('#_loadDialog_seekerlist').dialog({
 			title : '招聘方详情',
 			width : 800,
 			height : 500,
 			closed : false,
 			cache : false,
 			maximizable : true,
-			href : ctx + 'hunter/audit/' + id,
+			href : ctx + 'seeker/audit/' + id,
 			modal : true
 		});
 	}
 }
 
-function openBlackHunter(){
-	var row = getSingleTreeGridSelectData($("#hunterlistDg"));
+function openBlackseeker(){
+	var row = getSingleTreeGridSelectData($("#seekerlistDg"));
 	if (row != null) {
 		var id = row.id;
-		$('#_loadDialog_hunterlist').dialog({
+		$('#_loadDialog_seekerlist').dialog({
 			title : '招聘方详情',
 			width : 800,
 			height : 500,
 			closed : false,
 			cache : false,
 			maximizable : true,
-			href : ctx + 'hunter/black/' + id,
+			href : ctx + 'seeker/black/' + id,
 			modal : true
 		});
 	}

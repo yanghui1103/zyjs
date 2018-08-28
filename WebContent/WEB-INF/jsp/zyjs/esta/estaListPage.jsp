@@ -33,6 +33,7 @@
         	<a href="javascript:stopExtenalCode();" class="easyui-linkbutton" iconCls="icon-remove" >禁用</a> 
         	<a href="javascript:startExtenalCode();" class="easyui-linkbutton" iconCls="icon-remove" >启用</a> 
         	<a href="javascript:initExtenalPwd();" class="easyui-linkbutton" iconCls="icon-edit" >初始化密码</a> 
+        	<a href="#" class="easyui-linkbutton" iconCls="icon-edit" >发送站内信</a> 
         </form>
         	<input name="area" id="area" value="${area }" type="hidden">
       </div>

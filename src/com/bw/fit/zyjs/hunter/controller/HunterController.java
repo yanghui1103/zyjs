@@ -54,8 +54,18 @@ public class HunterController extends BaseController {
 		model.addAttribute("hunter", te) ;
 		return "zyjs/hunter/hunterAuditPage" ;
 	}
+
+	@RequestMapping("black/{id}")
+	public String black(@PathVariable String id,Model model){
+		Hunter te = hunterService.get(id);
+		te.setIndustry(dictService.getDictByValue(te.getIndustry()).getDictName());
+		te.setScale(dictService.getDictByValue(te.getScale()).getDictName());
+		te.setCompType(dictService.getDictByValue(te.getCompType()).getDictName());
+		model.addAttribute("hunter", te) ;
+		return "zyjs/hunter/hunterBlackPage" ;
+	}
 	
-	@RequestMapping(value="audit",method=RequestMethod.POST)
+	@RequestMapping(value="audit",method=RequestMethod.PUT)
 	@ResponseBody
 	public JSONObject auditud(@ModelAttribute Audit audit) throws Exception{
 		JSONObject json = hunterService.updateAndAudit(audit);

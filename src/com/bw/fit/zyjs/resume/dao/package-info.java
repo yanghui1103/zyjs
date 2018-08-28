@@ -5,4 +5,4 @@
  * @author yangh
  *
  */
-package com.bw.fit.zyjs.seeker.model;
+package com.bw.fit.zyjs.resume.dao;

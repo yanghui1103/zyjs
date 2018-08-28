@@ -36,6 +36,7 @@
     	<package name="com.bw.fit.zyjs.hunter.entity"/>
     	<package name="com.bw.fit.zyjs.person.entity"/>
     	<package name="com.bw.fit.zyjs.audit.entity"/>
+    	<package name="com.bw.fit.zyjs.seeker.entity"/>
     	
     	
     </typeAliases>
