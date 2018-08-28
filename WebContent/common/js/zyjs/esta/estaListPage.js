@@ -75,6 +75,22 @@ function openExUserDetail(id,type){
 	}
 }
 
+function openInnerMail(){
+	var row = getSingleTreeGridSelectData($("#estalistDg"));
+	if(row !=null){
+		$('#_loadDialog_estalist').dialog({    
+		    title: '外部用户详情',    
+		    width: 800,    
+		    height: 500,    
+		    closed: false,    
+		    cache: false,    
+		    maximizable:true,
+		    href: ctx+'innerMail/opensendMail/'+row.id+"/"+row.temp_str1,    
+		    modal: true   
+		}); 	
+	}
+	
+}
 
 function stopExtenalCode(){	 
 	var row = getSingleTreeGridSelectData($("#estalistDg"));
