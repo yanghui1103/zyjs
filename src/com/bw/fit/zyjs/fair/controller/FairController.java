@@ -34,4 +34,11 @@ public class FairController  extends BaseController{
 		
 		return "zyjs/fair/fairDetailPage";
 	}
+	
+
+	@RequestMapping(value="fairSort/{id}",method=RequestMethod.GET)
+	public String detail2(@PathVariable String id,Model model){
+		
+		return "zyjs/fair/fairEstaSortPage";
+	}
 }

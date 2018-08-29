@@ -97,7 +97,6 @@
 					dataType : "JSON"
 				});
 			});
-
 		}
 	</script>
 </body>
