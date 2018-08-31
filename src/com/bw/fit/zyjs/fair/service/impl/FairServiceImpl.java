@@ -44,4 +44,43 @@ public class FairServiceImpl implements FairService {
 		return fair;
 	}
 
+	@Override
+	public JSONObject updateStatus(String id,String status) throws RbackException {
+		JSONObject json = new JSONObject();
+		TFair tf = new TFair();
+		tf.setId(id);
+		tf.setStatus(status);
+		try {
+			fairDao.updateStatus(tf);
+			json.put("res", "2");
+			json.put("msg", "执行成功");
+		} catch (RbackException e) {
+			json = new JSONObject();
+			json.put("res", "1");
+			json.put("msg", e.getMsg());
+			throw e;
+		}finally{
+			return json ;
+		}
+	}
+
+	@Override
+	public JSONObject update(Fair fair) throws RbackException {
+		JSONObject json = new JSONObject();
+		TFair tf = new TFair();
+		PubFun.copyProperties(tf, fair);
+		try {
+			fairDao.update(tf);
+			json.put("res", "2");
+			json.put("msg", "执行成功");
+		} catch (RbackException e) {
+			json = new JSONObject();
+			json.put("res", "1");
+			json.put("msg", e.getMsg());
+			throw e;
+		}finally{
+			return json ;
+		}
+	}
+
 }

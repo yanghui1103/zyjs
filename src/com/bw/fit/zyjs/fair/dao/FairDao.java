@@ -12,4 +12,7 @@ public interface FairDao {
 	public List<TFair> all(TFair t); 
 	
 	public TFair get(String id);
+	
+	public void updateStatus(TFair tf) throws RbackException ;
+	public void update(TFair tf) throws RbackException ;
 }

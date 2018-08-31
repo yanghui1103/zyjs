@@ -68,6 +68,13 @@ public class FairController  extends BaseController{
 		return "zyjs/fair/fairDetailPage";
 	}
 	
+	@RequestMapping(value="update/{id}",method=RequestMethod.GET)
+	public String update(@PathVariable String id,Model model){
+		Fair f = fairService.get(id);
+		model.addAttribute("fair", f);
+		return "zyjs/fair/fairEditPage";
+	}
+	
 	@RequestMapping(value="fairSort/{id}",method=RequestMethod.GET)
 	public String detail2(@PathVariable String id,Model model){
 		
@@ -113,4 +120,33 @@ public class FairController  extends BaseController{
 		}
 	}
 	
+	@RequestMapping(value="close/{id}",method=RequestMethod.PUT)
+	@ResponseBody
+	public JSONObject close(@PathVariable String id) throws RbackException{
+		JSONObject json = new JSONObject();
+		json = fairService.updateStatus(id,"ended");		
+		return json  ;
+	}
+
+	@RequestMapping(value="start/{id}",method=RequestMethod.PUT)
+	@ResponseBody
+	public JSONObject start(@PathVariable String id) throws RbackException{
+		JSONObject json = new JSONObject();
+		json = fairService.updateStatus(id,"starting");		
+		return json  ;
+	}
+	
+	@RequestMapping(value="fair",method=RequestMethod.PUT)
+	@ResponseBody
+	public JSONObject update(@Valid @ModelAttribute Fair fair,BindingResult result) throws RbackException{
+		JSONObject json = new JSONObject();
+		if (result.hasErrors()) {
+			FieldError error = result.getFieldError();
+			json.put("res", "1");
+			returnFailJson(json, error.getDefaultMessage());
+			return json;
+		}
+		json = fairService.update(fair);		
+		return json  ;
+	}
 }

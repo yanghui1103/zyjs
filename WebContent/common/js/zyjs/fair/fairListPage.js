@@ -87,16 +87,58 @@ function openDetail(id) {
 }
  
 
-function openAddfair(){
-	var area  = $("#fairlistFMarea").val();
+function openEditfair(){
+	var row = getSingleTreeGridSelectData($("#fairlistDg"));
+	if (row != null) {
 		$('#_loadDialog_fairlist').dialog({
-		title : '新增招聘会',
-		width : '100%',
-		height : 500,
-		closed : false,
-		cache : false,
-		maximizable : true,
-		href : ctx + 'fair/fairAdd/'+area,
-		modal : true
-	});
+			title : '修改招聘会',
+			width : '100%',
+			height : 500,
+			closed : false,
+			cache : false,
+			maximizable : true,
+			href : ctx + 'fair/update/' + row.id ,
+			modal : true
+		});
+	}
+}
+
+
+function closefair(){
+	var row = getSingleTreeGridSelectData($("#fairlistDg"));
+	if(row !=null){
+		promptMessageCallBack("3","是否确认关闭招聘会？",function(){					
+			$.ajax({
+				type : 'PUT',
+				url : ctx + "fair/close/"+row.id,
+				data : {},
+				success : function(data) {
+					promptMessageCallBack(data.res, data.msg,function(){
+						fairReloadgrid();
+					} );
+				},
+				dataType : "JSON"
+			});
+		});
+	}
+}
+
+
+function startfair(){
+	var row = getSingleTreeGridSelectData($("#fairlistDg"));
+	if(row !=null){
+		promptMessageCallBack("3","是否确认开启招聘会？",function(){					
+			$.ajax({
+				type : 'PUT',
+				url : ctx + "fair/start/"+row.id,
+				data : {},
+				success : function(data) {
+					promptMessageCallBack(data.res, data.msg,function(){
+						fairReloadgrid();
+					} );
+				},
+				dataType : "JSON"
+			});
+		});
+	}
 }

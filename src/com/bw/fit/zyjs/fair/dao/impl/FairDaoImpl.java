@@ -32,4 +32,14 @@ public class FairDaoImpl implements FairDao {
 		return (TFair)daoTemplete.getOneData("fairSql.get", id);
 	}
 
+	@Override
+	public void updateStatus(TFair tf) throws RbackException {
+		daoTemplete.update("fairSql.updateStatus", tf);
+	}
+
+	@Override
+	public void update(TFair tf) throws RbackException {
+		daoTemplete.update("fairSql.update", tf);
+	}
+
 }

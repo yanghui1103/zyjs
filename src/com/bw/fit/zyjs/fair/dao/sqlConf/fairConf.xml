@@ -36,12 +36,24 @@
 		select * from t_company a where a.id = #{id,jdbcType=VARCHAR}
 	</select>
 	
-	<update id="create" parameterType="tFair"> 
+	<insert id="create" parameterType="tFair"> 
 		insert into t_fair (id,name,address,introduction,startdate,enddate,typecode,department,department2,isdeleted,creator,createtime,area,phone)
 		values (#{id},#{name,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},#{introduction,jdbcType=VARCHAR}
 		,to_date(#{startDate,jdbcType=VARCHAR},'yyyy-MM-dd'),to_date(#{endDate,jdbcType=VARCHAR},'yyyy-MM-dd')
 		,#{typeCode},#{department,jdbcType=VARCHAR},#{department2,jdbcType=VARCHAR},'0'
 		,#{creator,jdbcType=VARCHAR},sysdate,#{area,jdbcType=VARCHAR} ,#{phone,jdbcType=VARCHAR})
+	</insert>
+	
+	<update id="updateStatus" parameterType="tFair"> 
+		update t_fair set status = #{status,jdbcType=VARCHAR}  where id = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="update"  parameterType="tFair"> 
+		update t_fair set name=#{name,jdbcType=VARCHAR},introduction=#{introduction,jdbcType=VARCHAR},
+		typecode=#{typeCode,jdbcType=VARCHAR},
+		department=#{department,jdbcType=VARCHAR},
+		department2=#{department2,jdbcType=VARCHAR},
+		phone=#{phone,jdbcType=VARCHAR} where id = #{id,jdbcType=VARCHAR}
 	</update>
 	
 	<select id="getSubject" parameterType="String" resultType="TEsta">
