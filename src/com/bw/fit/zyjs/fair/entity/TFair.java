@@ -12,8 +12,23 @@ public class TFair extends BaseEntity {
 	private String typeCode;
 	private String department;
 	private String department2;
+	private String area;
+	private String phone;
 	
 	
+	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
+	}
 	public String getName() {
 		return name;
 	}

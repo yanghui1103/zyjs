@@ -36,4 +36,12 @@ public class FairServiceImpl implements FairService {
 		}
 	}
 
+	@Override
+	public Fair get(String id) {
+		TFair t = fairDao.get(id);
+		Fair fair  = new Fair();
+		PubFun.copyProperties(fair, t);
+		return fair;
+	}
+
 }

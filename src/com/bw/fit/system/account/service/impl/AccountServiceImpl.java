@@ -27,10 +27,14 @@ import com.bw.fit.system.role.entity.TRole2Account;
 import com.bw.fit.system.role.entity.TRole2dataauthOrgs;
 import com.bw.fit.system.role.model.Role2Account;
 import com.bw.fit.system.role.service.RoleService;
+import com.bw.fit.system.user.model.User;
+import com.bw.fit.system.user.service.UserService;
 
 @Service
 public class AccountServiceImpl implements AccountService {
 
+	@Autowired
+	private UserService userService;
 	@Autowired
 	private AccountDao accountDao ;
 	@Autowired
@@ -133,7 +137,10 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public Account get(String id) {
-		return accountDao.getAccount(id);
+		Account account = accountDao.getAccount(id);
+		User thisUser = userService.getByCode(account.getUserId());
+		PubFun.copyProperties(account, thisUser);
+		return account ;
 	}
 
 	@Override

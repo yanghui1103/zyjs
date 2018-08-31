@@ -8,4 +8,5 @@ public interface FairService {
 
 	public JSONObject add(Fair fair) throws RbackException ;
 	
+	public Fair get(String id);
 }

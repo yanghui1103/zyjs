@@ -5,7 +5,7 @@
 		select a.fdid id ,a.parent_id parentId,a.dict_name dictName,
 		a.dict_value dictValue,num sortNumber,can_add canAdd,can_edit canEdit,
 		can_del canDel,dict_remark dictRemark ,isdeleted from data_dict  a 
-		where 1=1 and isdeleted='0' and dict_value =  #{value}
+		where 1=1 and isdeleted='0' and dict_value =  #{value,jdbcType=VARCHAR}
 	</select>
 	<select id="getIdByDictValue"  parameterType="string" resultType="string">
 		select fdid from data_dict a where a.dict_value = #{value}

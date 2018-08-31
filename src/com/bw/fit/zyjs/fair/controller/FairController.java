@@ -16,11 +16,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.aspose.words.List;
 import com.bw.fit.system.account.model.Account;
+import com.bw.fit.system.account.service.AccountService;
 import com.bw.fit.system.common.controller.BaseController;
 import com.bw.fit.system.common.model.RbackException;
 import com.bw.fit.system.common.util.PubFun;
+import com.bw.fit.system.dict.service.DictService;
+import com.bw.fit.zyjs.fair.dao.FairDao;
+import com.bw.fit.zyjs.fair.entity.TFair;
 import com.bw.fit.zyjs.fair.model.Fair;
 import com.bw.fit.zyjs.fair.service.FairService;
 
@@ -34,7 +40,13 @@ import com.bw.fit.zyjs.fair.service.FairService;
 public class FairController  extends BaseController{
 
 	@Autowired
+	private AccountService accountService;
+	@Autowired
+	private DictService dictService;
+	@Autowired
 	private FairService fairService;
+	@Autowired
+	private FairDao fairDao ;
 	
 	@RequestMapping("gotoList/{area}")
 	public String gotolist(@PathVariable String area,Model model){
@@ -50,7 +62,9 @@ public class FairController  extends BaseController{
 	
 	@RequestMapping(value="fair/{id}",method=RequestMethod.GET)
 	public String detail(@PathVariable String id,Model model){
-		
+		Fair f = fairService.get(id);
+		f.setCreator(accountService.get(f.getCreator()).getName());
+		model.addAttribute("fair", f);
 		return "zyjs/fair/fairDetailPage";
 	}
 	
@@ -59,7 +73,12 @@ public class FairController  extends BaseController{
 		
 		return "zyjs/fair/fairEstaSortPage";
 	}
-	
+
+	@RequestMapping(value="fairAdd/{area}",method=RequestMethod.GET)
+	public String add(@PathVariable String area,Model model){
+		model.addAttribute("area", area);
+		return "zyjs/fair/fairAddPage";
+	}
 	@RequestMapping(value="fair",method=RequestMethod.POST)
 	@ResponseBody
 	public JSONObject create(@Valid @ModelAttribute Fair fair,BindingResult result) throws RbackException{
@@ -76,4 +95,22 @@ public class FairController  extends BaseController{
 		json = fairService.add(fair);
 		return json;
 	}
+	
+	@RequestMapping(value="fairs/{area}",method=RequestMethod.GET)
+	@ResponseBody
+	public JSONArray selectAll(@PathVariable String area,@ModelAttribute Fair fair){
+		TFair t = new TFair();
+		PubFun.copyProperties(t, fair);
+		java.util.List<TFair> fs = fairDao.all(t);
+		if(fs !=null){
+			for(TFair tt:fs){
+				tt.setTypeCode(dictService.getDictByValue(tt.getTypeCode()).getDictName());
+				tt.setStatus((dictService.getDictsByParentValue(tt.getStatus())==null)?"未知":(dictService.getDictsByParentValue(tt.getStatus())).getDictName());
+			}
+			return (JSONArray)JSONArray.toJSON(fs) ;
+		}else{
+			return null ;
+		}
+	}
+	
 }

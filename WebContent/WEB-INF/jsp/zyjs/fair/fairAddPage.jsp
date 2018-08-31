@@ -22,11 +22,11 @@
 		data-options="novalidate:false">
 		<div style="margin-bottom: 20px;margin-left: 90px">  
 			<div>招聘会名称</div>
-			<input class="easyui-textbox" data-options="required:true,validType:['length[0,200]']"  style="width: 80%;paddding-right:2px"   >
+			<input class="easyui-textbox" name="name" data-options="required:true,validType:['length[0,200]']"  style="width: 80%;paddding-right:2px"   >
 		</div>
 		<div style="margin-bottom: 20px;margin-left: 90px">  
 			<div>类型</div>
-			<select class="easyui-combogrid" name="code" editable="false"
+			<select class="easyui-combogrid" name="typeCode" editable="false"
 				style="width: 30%"
 				data-options="limitToList:true,
 					panelWidth: 200,
@@ -45,28 +45,29 @@
 		</div>
 		<div style="margin-bottom: 20px;margin-left: 90px">  
 			<div>主办单位</div>
-			<input class="easyui-textbox" data-options="required:true,validType:['length[0,200]']"  style="width: 80%;paddding-right:2px"   >
+			<input class="easyui-textbox" name="department"  data-options="required:true,validType:['length[0,200]']"  style="width: 80%;paddding-right:2px"   >
 		</div>
 		<div style="margin-bottom: 20px;margin-left: 90px">  
 			<div>协办单位</div>
-			<input class="easyui-textbox" data-options="validType:['length[0,200]']"  style="width: 80%;paddding-right:2px"   >
+			<input class="easyui-textbox" name="department2" data-options="validType:['length[0,200]']"  style="width: 80%;paddding-right:2px"   >
 		</div>
 		<div style="margin-bottom: 20px;margin-left: 90px">  
 			<div>举办地</div>
-			<input class="easyui-textbox" data-options="required:true,validType:['length[0,200]']"  style="width: 80%;paddding-right:2px"   >
+			<input class="easyui-textbox"  name="address" data-options="required:true,validType:['length[0,200]']"  style="width: 80%;paddding-right:2px"   >
 		</div>
 		<div style="margin-bottom: 20px;margin-left: 90px">  
 			<div>开始日期</div>
-			<input class="easyui-datebox"   data-options="required:true,formatter:myformatter,parser:myparser"  style="width:80%;">
+			<input class="easyui-datebox" name="startDate"  data-options="required:true,formatter:myformatter,parser:myparser"  style="width:80%;">
 		</div>
 		<div style="margin-bottom: 20px;margin-left: 90px">  
 			<div>结束日期</div>
-			<input class="easyui-datebox"   data-options="required:true,formatter:myformatter,parser:myparser" style="width:80%;">
+			<input class="easyui-datebox" name="endDate"   data-options="required:true,formatter:myformatter,parser:myparser" style="width:80%;">
 		</div>
 		<div style="margin-bottom: 20px;margin-left: 90px">  
 			<div>介绍</div>
-			<input class="easyui-textbox" name="remark" style="width:80%;height:60px" data-options="label:'Message:',multiline:true">
+			<input class="easyui-textbox" name="introduction" style="width:80%;height:60px" data-options="label:'Message:',multiline:true">
 		</div>
+		<input name="area" value="${area }" type="hidden">
 	</form>
 	<script type="text/javascript">
 	function myformatter(date){
