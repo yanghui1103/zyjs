@@ -104,3 +104,17 @@ function openBlackfair(){
 		});
 	}
 }
+
+
+function openAddfair(){
+		$('#_loadDialog_fairlist').dialog({
+		title : '新增招聘会',
+		width : 800,
+		height : 500,
+		closed : false,
+		cache : false,
+		maximizable : true,
+		href : ctx + 'system/gotoIframePage/zyjs/fair/fairAddPage/-9',
+		modal : true
+	});
+}

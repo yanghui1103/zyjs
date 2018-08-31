@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fairSql"> 
+	<sql id="areaSql">
+		<if test="area!=''">
+			and a.area = #{area}
+		</if>
+	</sql>
+	<select id="selectAll" parameterType="TEsta" resultType="TEsta">
+		select * from (select tc.id,'企业' temp_str1,tc.email phone,tc.createtime,tc.name,isdeleted,area from t_company tc
+		union all
+		select ta.id,'个人' temp_str1,ta.phone,ta.createtime,'' name,isdeleted,area from t_person ta ) a
+		where 1=1 and ( a.name like '%'||#{keyWords,jdbcType=VARCHAR}||'%' 
+		or a.phone  like '%'||#{keyWords,jdbcType=VARCHAR}||'%'
+		or a.temp_str1  like '%'||#{keyWords,jdbcType=VARCHAR}||'%' )
+		<include refid="areaSql" />
+	</select>
+	
+	<update id="updateExtenalUserStatus" parameterType="map">
+		update  ${tableName}  set isdeleted = #{isdeleted,jdbcType=VARCHAR} where id = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="getExtenalType" parameterType="String" resultType="TEsta">
+		select * from (select tc.id,'t_company' temp_str1  from t_company tc
+    		union all
+    	select ta.id,'t_person' temp_str1 from t_person ta ) a where a.id =#{id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="get" parameterType="string" resultType="TEsta">
+		select * from (select tc.id,'企业' temp_str1,tc.email phone,tc.createtime,tc.name,isdeleted,area from t_company tc
+		union all
+		select ta.id,'个人' temp_str1,ta.phone,ta.createtime,'' name,isdeleted,area from t_person ta ) a where a.id = #{id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getOne" parameterType="string" resultType="TEsta">
+		select * from t_company a where a.id = #{id,jdbcType=VARCHAR}
+	</select>
+	
+	<update id="create" parameterType="tFair"> 
+		insert into t_fair (id,name,address,introduction,startdate,enddate,typecode,department,department2,isdeleted,creator,createtime)
+		values (#{id},#{name,jdbcType=VARCHAR},#{introduction,jdbcType=VARCHAR}
+		,to_date(#{startDate,jdbcType=VARCHAR},'yyyy-MM-dd'),to_date(#{endDate,jdbcType=VARCHAR},'yyyy-MM-dd')
+		,#{typeCode},#{department,jdbcType=VARCHAR},#{department2,jdbcType=VARCHAR},'0',#{creator,jdbcType=VARCHAR},sysdate )
+	</update>
+	
+	<select id="getSubject" parameterType="String" resultType="TEsta">
+		select * from (select tc.id,'company' temp_str1,tc.email phone,tc.createtime,tc.name,isdeleted,area,tc.password from t_company tc
+    	union all
+    	select ta.id,'person' temp_str1,ta.phone,ta.createtime,'' name,isdeleted,area,ta.password from t_person ta ) a
+    	where a.id = #{id,jdbcType=VARCHAR}
+	</select>
+</mapper>   
