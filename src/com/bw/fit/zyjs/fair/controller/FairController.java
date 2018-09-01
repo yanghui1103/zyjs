@@ -29,6 +29,8 @@ import com.bw.fit.zyjs.fair.dao.FairDao;
 import com.bw.fit.zyjs.fair.entity.TFair;
 import com.bw.fit.zyjs.fair.model.Fair;
 import com.bw.fit.zyjs.fair.service.FairService;
+import com.bw.fit.zyjs.hunter.model.Hunter;
+import com.bw.fit.zyjs.hunter.service.HunterService;
 
 /****
  * 招聘会
@@ -39,6 +41,8 @@ import com.bw.fit.zyjs.fair.service.FairService;
 @Controller
 public class FairController  extends BaseController{
 
+	@Autowired
+	private HunterService hunterService;
 	@Autowired
 	private AccountService accountService;
 	@Autowired
@@ -75,10 +79,26 @@ public class FairController  extends BaseController{
 		return "zyjs/fair/fairEditPage";
 	}
 	
-	@RequestMapping(value="fairSort/{id}",method=RequestMethod.GET)
+	@RequestMapping(value="sort/{id}",method=RequestMethod.GET)
 	public String detail2(@PathVariable String id,Model model){
-		
+		Fair f = fairService.get(id);
+		f.setCreator(accountService.get(f.getCreator()).getName());
+		model.addAttribute("fair", f);
 		return "zyjs/fair/fairEstaSortPage";
+	}
+	
+	@RequestMapping(value="hunters/{fairId}",method=RequestMethod.GET)
+	@ResponseBody
+	public JSONArray hs(@PathVariable String fairId){
+		java.util.List<Hunter> hs = hunterService.huntersOfFair(fairId);
+		if(hs !=null){
+			for(Hunter h:hs){
+				h.setScale(dictService.getDictByValue(h.getScale()).getDictName());
+				h.setIndustry(dictService.getDictByValue(h.getIndustry()).getDictName());
+				h.setCompType(dictService.getDictByValue(h.getCompType()).getDictName());
+			}
+		}
+		return (JSONArray)JSONArray.toJSON(hs);
 	}
 
 	@RequestMapping(value="fairAdd/{area}",method=RequestMethod.GET)

@@ -28,6 +28,11 @@ public class HunterDaoImpl implements HunterDao {
 	public void update(THunter hunter) throws RbackException {
 		daoTemplete.update("hunterSql.update", hunter);
 	}
+
+	@Override
+	public List<THunter> huntersOfFair(String fairId) {
+		return daoTemplete.getListData("hunterSql.huntersOfFair", fairId);
+	}
 	
 
 }

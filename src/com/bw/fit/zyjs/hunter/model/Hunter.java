@@ -15,9 +15,23 @@ public class Hunter extends BaseModel {
 	private String cardId;
 	private String introduction ;
 	private String phone;
+	private String ptCode;
+	private String serialNumber;
 	
 	
 	
+	public String getPtCode() {
+		return ptCode;
+	}
+	public void setPtCode(String ptCode) {
+		this.ptCode = ptCode;
+	}
+	public String getSerialNumber() {
+		return serialNumber;
+	}
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
+	}
 	public String getPhone() {
 		return phone;
 	}

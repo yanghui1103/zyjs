@@ -5,6 +5,7 @@ import java.util.*;
 import com.alibaba.fastjson.JSONObject;
 import com.bw.fit.system.common.model.RbackException;
 import com.bw.fit.zyjs.audit.model.Audit;
+import com.bw.fit.zyjs.hunter.entity.THunter;
 import com.bw.fit.zyjs.hunter.model.Hunter;
 
 public interface HunterService {
@@ -19,4 +20,10 @@ public interface HunterService {
 	public JSONObject update(Hunter hunter) throws RbackException ;
 	
 	public JSONObject updateAndAudit(Audit audit) throws RbackException ;
+	/****
+	 * 查询招聘会下已经报名的企业
+	 * @param fairId
+	 * @return
+	 */
+	public List<Hunter> huntersOfFair(String fairId);
 }

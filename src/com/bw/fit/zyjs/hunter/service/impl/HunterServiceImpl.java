@@ -100,4 +100,19 @@ public class HunterServiceImpl implements HunterService {
 		}
 	}
 
+	@Override
+	public List<Hunter> huntersOfFair(String fairId) {
+		List<THunter> hs = hunterDao.huntersOfFair(fairId);
+		if(hs !=null){
+			List<Hunter> hhs = new ArrayList<>();
+			for(THunter t:hs){
+				Hunter h = new Hunter();
+				PubFun.copyProperties(h, t);
+				hhs.add(h);
+			}
+			return hhs;
+		}
+		return null;
+	}
+
 }

@@ -16,4 +16,10 @@ public interface HunterDao {
 	public List<THunter> selectAll(THunter th);
 	
 	public void update(THunter hunter) throws RbackException ;
+	/****
+	 * 查询招聘会下已经报名的企业
+	 * @param fairId
+	 * @return
+	 */
+	public List<THunter> huntersOfFair(String fairId);
 }

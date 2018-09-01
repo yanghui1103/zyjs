@@ -86,6 +86,19 @@ function openDetail(id) {
 		});
 }
  
+function openAddfair(){
+	var area = $("#fairlistFMarea").val();
+	$('#_loadDialog_fairlist').dialog({
+		title : '新增招聘会',
+		width : '100%',
+		height : 500,
+		closed : false,
+		cache : false,
+		maximizable : true,
+		href : ctx + 'fair/fairAdd/'+area ,
+		modal : true
+	});
+}
 
 function openEditfair(){
 	var row = getSingleTreeGridSelectData($("#fairlistDg"));
