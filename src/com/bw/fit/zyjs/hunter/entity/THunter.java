@@ -19,7 +19,7 @@ public class THunter extends BaseEntity{
 	private String introduction ;
 	private String phone;
 	private String ptCode;
-	private String serialNumber;
+	private int serialNumber;
 	
 	
 	
@@ -29,10 +29,11 @@ public class THunter extends BaseEntity{
 	public void setPtCode(String ptCode) {
 		this.ptCode = ptCode;
 	}
-	public String getSerialNumber() {
+	
+	public int getSerialNumber() {
 		return serialNumber;
 	}
-	public void setSerialNumber(String serialNumber) {
+	public void setSerialNumber(int serialNumber) {
 		this.serialNumber = serialNumber;
 	}
 	public String getPhone() {

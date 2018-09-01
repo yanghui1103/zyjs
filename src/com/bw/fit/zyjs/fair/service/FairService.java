@@ -12,4 +12,5 @@ public interface FairService {
 	
 	public JSONObject updateStatus(String id,String status) throws RbackException ;
 	public JSONObject update(Fair fair) throws RbackException ;
+	public JSONObject saveSort(String id,int seriralNumber,String ptCode,String fairId)  throws RbackException ;
 }

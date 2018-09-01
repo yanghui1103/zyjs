@@ -1,5 +1,7 @@
 package com.bw.fit.zyjs.hunter.model;
 
+import javax.validation.constraints.Size;
+
 import com.bw.fit.system.common.model.BaseModel;
 
 public class Hunter extends BaseModel {
@@ -15,8 +17,9 @@ public class Hunter extends BaseModel {
 	private String cardId;
 	private String introduction ;
 	private String phone;
+	@Size(min=4,max=10,message="展位编号需要在4-10以内")
 	private String ptCode;
-	private String serialNumber;
+	private int serialNumber;
 	
 	
 	
@@ -26,10 +29,11 @@ public class Hunter extends BaseModel {
 	public void setPtCode(String ptCode) {
 		this.ptCode = ptCode;
 	}
-	public String getSerialNumber() {
+	
+	public int getSerialNumber() {
 		return serialNumber;
 	}
-	public void setSerialNumber(String serialNumber) {
+	public void setSerialNumber(int serialNumber) {
 		this.serialNumber = serialNumber;
 	}
 	public String getPhone() {

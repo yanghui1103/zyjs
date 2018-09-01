@@ -169,4 +169,18 @@ public class FairController  extends BaseController{
 		json = fairService.update(fair);		
 		return json  ;
 	}
+	
+	@RequestMapping(value="sortSave/{id}/{fairId}/{number}/{ptCode}",method= RequestMethod.PUT)
+	@ResponseBody
+	public JSONObject save(@PathVariable(value="fairId") String fairId,@PathVariable(value="id") String id,
+			@PathVariable(value="number") int number,@PathVariable(value="ptCode") String ptCode) throws RbackException{
+		if(ptCode.length()<1 || ptCode.length()>10){
+			JSONObject j = new JSONObject();
+			j.put("res", "1");
+			j.put("msg", "展位编码不得超过10位");
+			return j ;
+		}
+		JSONObject json = fairService.saveSort(id, number, ptCode, fairId);
+		return json ;
+	}
 }

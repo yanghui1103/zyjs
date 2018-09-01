@@ -39,9 +39,9 @@
 	</select>
 	
 	<select id="huntersOfFair" parameterType="String" resultType="tHunter">
-		select cp.name,cp.email,cp.scale,cp.industry,cp.compType ,fe.ptCode,fe.serialNumber
+		select te.id,cp.name,cp.email,cp.scale,cp.industry,cp.compType ,fe.ptCode,fe.serialNumber
   		from t_fair2employer fe,t_employer te ,t_fair fa,t_company cp
   		where te.id = fe.employerid  and cp.id = te.foreignid and cp.isdeleted='0'
-  		and fa.id = fe.fairid and te.isdeleted = '0' and te.status='pass' and fa.id = #{id,jdbcType=VARCHAR}
+  		and fa.id = fe.fairid and te.isdeleted = '0' and te.status='pass' and fa.id = #{id,jdbcType=VARCHAR} order by fe.serialNumber asc
 	</select>
 </mapper>   

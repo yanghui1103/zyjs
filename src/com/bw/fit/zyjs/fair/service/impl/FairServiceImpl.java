@@ -10,6 +10,7 @@ import com.bw.fit.zyjs.fair.dao.FairDao;
 import com.bw.fit.zyjs.fair.entity.TFair;
 import com.bw.fit.zyjs.fair.model.Fair;
 import com.bw.fit.zyjs.fair.service.FairService;
+import com.bw.fit.zyjs.hunter.entity.THunter;
 
 @Service
 public class FairServiceImpl implements FairService {
@@ -71,6 +72,29 @@ public class FairServiceImpl implements FairService {
 		PubFun.copyProperties(tf, fair);
 		try {
 			fairDao.update(tf);
+			json.put("res", "2");
+			json.put("msg", "执行成功");
+		} catch (RbackException e) {
+			json = new JSONObject();
+			json.put("res", "1");
+			json.put("msg", e.getMsg());
+			throw e;
+		}finally{
+			return json ;
+		}
+	}
+
+	@Override
+	public JSONObject saveSort(String id, int seriralNumber, String ptCode,String fairId)
+			throws RbackException {
+		JSONObject json = new JSONObject();
+		THunter t = new THunter();
+		t.setId(id);
+		t.setSerialNumber(seriralNumber);
+		t.setPtCode(ptCode);
+		t.setTemp_str1(fairId);
+		try {
+			fairDao.saveSort(t);
 			json.put("res", "2");
 			json.put("msg", "执行成功");
 		} catch (RbackException e) {

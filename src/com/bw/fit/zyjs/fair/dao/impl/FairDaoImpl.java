@@ -9,6 +9,7 @@ import com.bw.fit.system.common.dao.DaoTemplete;
 import com.bw.fit.system.common.model.RbackException;
 import com.bw.fit.zyjs.fair.dao.FairDao;
 import com.bw.fit.zyjs.fair.entity.TFair;
+import com.bw.fit.zyjs.hunter.entity.THunter;
 import com.github.pagehelper.PageHelper;
 @Repository
 public class FairDaoImpl implements FairDao {
@@ -40,6 +41,11 @@ public class FairDaoImpl implements FairDao {
 	@Override
 	public void update(TFair tf) throws RbackException {
 		daoTemplete.update("fairSql.update", tf);
+	}
+
+	@Override
+	public void saveSort(THunter t) throws RbackException {
+		daoTemplete.update("fairSql.saveSort", t);
 	}
 
 }

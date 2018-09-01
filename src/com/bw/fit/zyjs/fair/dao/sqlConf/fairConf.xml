@@ -56,6 +56,12 @@
 		phone=#{phone,jdbcType=VARCHAR} where id = #{id,jdbcType=VARCHAR}
 	</update>
 	
+	<update id="saveSort" parameterType="tHunter"> 
+		update t_fair2employer set ptcode = #{ptCode,jdbcType=VARCHAR},
+		serialnumber = #{serialNumber,jdbcType=INTEGER}
+		where employerid = #{id}  and  fairId = #{temp_str1} 
+	</update>
+	
 	<select id="getSubject" parameterType="String" resultType="TEsta">
 		select * from (select tc.id,'company' temp_str1,tc.email phone,tc.createtime,tc.name,isdeleted,area,tc.password from t_company tc
     	union all
