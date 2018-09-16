@@ -20,9 +20,9 @@ import com.mchange.v2.ser.SerializableUtils;
 /*****
  * redis存储会话
  * @author yangh
- *
+ * @Repository(value = "redisSessionDAO")
  */
-@Repository(value = "redisSessionDAO")
+
 public class CachingShiroSessionDaoImpl extends EnterpriseCacheSessionDAO {
 	
 	@Autowired

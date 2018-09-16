@@ -79,8 +79,8 @@ function openInnerMail(){
 	var row = getSingleTreeGridSelectData($("#estalistDg"));
 	if(row !=null){
 		$('#_loadDialog_estalist').dialog({    
-		    title: '外部用户详情',    
-		    width: 800,    
+		    title: '发送站内信',    
+		    width: '100%',
 		    height: 500,    
 		    closed: false,    
 		    cache: false,    

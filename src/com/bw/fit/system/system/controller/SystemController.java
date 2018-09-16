@@ -134,7 +134,7 @@ public class SystemController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		model.addAttribute("param", param);
+		model.addAttribute("arg", param);
 		return path1+"/"+path2+"/"+pageName  ;
 	}
 }

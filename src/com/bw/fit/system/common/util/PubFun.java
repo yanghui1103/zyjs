@@ -598,43 +598,43 @@ public class PubFun {
 
 	
 	public static void main(String[] args) {
-		//System.out.println(getUserPasswordShiro("admin", "123456", "MD5", 10));
+		System.out.println(getUserPasswordShiro("admin", "123456", "MD5", 10));
 		
 		
-		Map map = new HashMap();
-	    map.put("AA",213);
-	    map.put("BB",45);
-	    map.put(123,"CC");
-	    map.put(null,null);
-	    map.put(new Account(),89);
-	 
-	 
-	    //1.遍历key集.此时打印输出 null,AA,Person    //[name=DD,age=23],BB,123
-	    Set set = map.keySet();
-	    for(Object obj : set){
-	      System.out.println(obj);
-	    }
-	    //2.遍历value集.此时打印输出null,213,89,45,CC
-	    Collection values = map.values();
-	    Iterator i = values.iterator();
-	    while(i.hasNext()){
-	      System.out.println(i.next());
-	    }
-	    System.out.println("--------------");
-	    //3.如何遍历key-value对
-	    //方式一
-	    Set set1 = map.keySet();
-	    for(Object obj : set1){
-	      System.out.println(obj + "----->" + map.get(obj));
-	    }
-	    System.out.println("--------------");
-	    //方式二
-	    Set set2 = map.entrySet();
-	    for(Object obj : set2 ){
-	      Map.Entry entry = (Map.Entry)obj;
-	      System.out.println(entry.getKey() + "---->" + entry.getValue());
-	    }
-	    System.out.println("--------------");
+//		Map map = new HashMap();
+//	    map.put("AA",213);
+//	    map.put("BB",45);
+//	    map.put(123,"CC");
+//	    map.put(null,null);
+//	    map.put(new Account(),89);
+//	 
+//	 
+//	    //1.遍历key集.此时打印输出 null,AA,Person    //[name=DD,age=23],BB,123
+//	    Set set = map.keySet();
+//	    for(Object obj : set){
+//	      System.out.println(obj);
+//	    }
+//	    //2.遍历value集.此时打印输出null,213,89,45,CC
+//	    Collection values = map.values();
+//	    Iterator i = values.iterator();
+//	    while(i.hasNext()){
+//	      System.out.println(i.next());
+//	    }
+//	    System.out.println("--------------");
+//	    //3.如何遍历key-value对
+//	    //方式一
+//	    Set set1 = map.keySet();
+//	    for(Object obj : set1){
+//	      System.out.println(obj + "----->" + map.get(obj));
+//	    }
+//	    System.out.println("--------------");
+//	    //方式二
+//	    Set set2 = map.entrySet();
+//	    for(Object obj : set2 ){
+//	      Map.Entry entry = (Map.Entry)obj;
+//	      System.out.println(entry.getKey() + "---->" + entry.getValue());
+//	    }
+//	    System.out.println("--------------");
 		
 	}
 	

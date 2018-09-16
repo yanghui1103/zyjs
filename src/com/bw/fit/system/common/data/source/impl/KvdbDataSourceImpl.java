@@ -15,7 +15,7 @@ import com.bw.fit.system.common.util.PropertiesUtil;
  * @author yangh
  *
  */
-@Component
+
 public class KvdbDataSourceImpl  implements KvdbDataSource{
 	 @Autowired
 	 private RedisTemplate redisTemplate ;

@@ -16,7 +16,7 @@ import com.bw.fit.system.common.model.RbackException;
  * @author yangh
  *
  */
-@Component 
+
 public class NoSQLDataSourceImpl implements NoSQLDataSource {
 
 	private JedisCluster jedisCluster; 

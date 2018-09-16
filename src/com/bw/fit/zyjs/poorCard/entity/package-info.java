@@ -5,4 +5,4 @@
  * @author yangh
  *
  */
-package com.bw.fit.zyjs.innerMail.dao;
+package com.bw.fit.zyjs.poorCard.entity;

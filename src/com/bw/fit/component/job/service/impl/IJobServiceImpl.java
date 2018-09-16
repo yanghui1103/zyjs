@@ -16,9 +16,8 @@ import com.bw.fit.system.common.util.QuartzManager;
 @Service
 public class IJobServiceImpl implements IJobService {
 
-	@Autowired
 	private JobDao jobDao;
-	@Autowired
+	
 	private JobRunUtil jobRunUtil;
 	
 	@Override

@@ -5,4 +5,4 @@
  * @author yangh
  *
  */
-package com.bw.fit.zyjs.innerMail.dao.impl;
+package com.bw.fit.zyjs.innerMail.sqlConf;

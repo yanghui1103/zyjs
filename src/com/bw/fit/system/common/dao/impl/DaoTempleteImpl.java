@@ -16,98 +16,40 @@ import com.bw.fit.system.common.model.RbackException;
 @Repository
 public class DaoTempleteImpl  implements DaoTemplete{
 
-	@Autowired
-	private MqDataSource mqDataSource ;
-	@Autowired
-	private KvdbDataSource kvdbDataSource; 
+//	@Autowired
+//	private MqDataSource mqDataSource ;
+//	@Autowired
+//	private KvdbDataSource kvdbDataSource; 
 	@Autowired
 	private RmdbDataSource rmdbDataSource ;
-	@Autowired
-	private NoSQLDataSource noSQLDataSource ;
+//	@Autowired
+//	private NoSQLDataSource noSQLDataSource ;
 	
+
 	@Override
-	public void sendDataToExchange(String message) throws RbackException {
-		mqDataSource.sendDataToExchange(message);
+	public void set(String key, Object value) throws RbackException {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void sendDataToQueue(String queueName, String message)
-			throws RbackException {
-		mqDataSource.sendDataToQueue(queueName, message);
+	public String get(String key) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public String consumeDataFormQueue(String queueName) throws RbackException {
-		return mqDataSource.consumeDataFormQueue(queueName);
+	public void del(String key) throws RbackException {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void del_list(String listName) {
-		noSQLDataSource.del_list(listName);
+	public Set getKeysByPattern(String pattern) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	@Override
-	public void lPush_list(String listName, String str) {
-		noSQLDataSource.lPush_list(listName, str);
-	}
-
-	@Override
-	public void lrange(String listName, long start, long end) {
-		 noSQLDataSource.lrange(listName, start, end);
-	}
-
-	@Override
-	public void rPush(String listName, String str)  throws RbackException  {
-		try {
-			noSQLDataSource.rPush(listName, str);
-		} catch (RbackException e) {
-			 throw new RbackException("1",e.getMessage())  ;
-		}
-	}
-
-	@Override
-	public void lRemove(String listName, long index) {
-	}
-
-	@Override
-	public String lIndex(String listName, long index) {
-		return noSQLDataSource.lIndex(listName, index);
-	}
-
-	@Override
-	public String lPop(String listName) {
-		return noSQLDataSource.lPop(listName);
-	}
-
-	@Override
-	public String rPop(String listName) {
-		return noSQLDataSource.rPop(listName);
-	}
-
-	@Override
-	public void sAdd(String setName, String object) {
-		noSQLDataSource.sAdd(setName, object);
-	}
-
-	@Override
-	public void sRemove(String setName, String object) {
-		noSQLDataSource.sRemove(setName, object);
-	}
-
-	@Override
-	public long sCard(String setName) {
-		return noSQLDataSource.sCard(setName);
-	}
-
-	@Override
-	public Long expire(String key, int seconds) {
-		return noSQLDataSource.expire(key, seconds);
-	}
-
-	@Override
-	public boolean sisMember(String setName, String object) {
-		return noSQLDataSource.sisMember(setName, object);
-	}
 
 	@Override
 	public void insert(String sql, Object object) throws RbackException {
@@ -134,29 +76,108 @@ public class DaoTempleteImpl  implements DaoTemplete{
 		return rmdbDataSource.getOneData(sql, object);
 	}
 
+
 	@Override
-	public void join() {
+	public void del_list(String listName) {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void set(String key, Object value) throws RbackException {
-		kvdbDataSource.set(key, value);
+	public void lPush_list(String listName, String str) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public String get(String key)  {
-		return kvdbDataSource.get(key)  ;
+	public void lrange(String listName, long start, long end) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void del(String key) throws RbackException {
-		kvdbDataSource.del(key);
+	public void rPush(String listName, String str) throws RbackException {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public Set getKeysByPattern(String pattern) {
-		return kvdbDataSource.getKeysByPattern(pattern);
+	public void lRemove(String listName, long index) {
+		// TODO Auto-generated method stub
+		
 	}
 
+	@Override
+	public String lIndex(String listName, long index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String lPop(String listName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String rPop(String listName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void sAdd(String setName, String object) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void sRemove(String setName, String object) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public long sCard(String setName) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean sisMember(String setName, String object) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Long expire(String key, int seconds) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void join() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void sendDataToExchange(String message) throws RbackException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void sendDataToQueue(String queueName, String message)
+			throws RbackException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String consumeDataFormQueue(String queueName) throws RbackException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+ 
 }

@@ -71,7 +71,7 @@
                     </div>
                     <div class="price item-box">
                         <div class="inform-hd">
-                            <label>公开竞价</label>
+                            <label>其他</label>
                             <a href="javascript:;">更多<span>&gt;</span></a>
                         </div>
                         <ul>
@@ -185,7 +185,7 @@
                                 <div class="work-inner">
                                     <div class="work-item green">
                                         <i class="iconfont">&#xe61f;</i>
-                                        <span class="num">14&nbsp;<span class="unit">个</span></span>
+                                        <span class="num">14/611&nbsp;<span class="unit">个</span></span>
                                         <label>待办未处理</label>
                                     </div>
                                 </div>
@@ -204,7 +204,7 @@
                                     <div class="work-item yellow">
                                          <i class="iconfont">&#xe61d;</i>
                                         <span class="num">9&nbsp;<span class="unit">封</span></span>
-                                        <label>邮件未读</label>
+                                        <label>站内信未读</label>
                                     </div>
                                 </div>
                             </li>
@@ -213,7 +213,7 @@
                                     <div class="work-item blue">
                                          <i class="iconfont">&#xe621;</i>
                                         <span title="2000,00万" class="num">2000,00&nbsp;<span class="unit">万</span></span>
-                                        <label>我的询价金额</label>
+                                        <label>我的*****</label>
                                     </div>
                                 </div>
                             </li>
@@ -222,7 +222,7 @@
                                     <div class="work-item purple">
                                          <i class="iconfont">&#xe61e;</i>
                                         <span title="2000,00万" class="num">100,00&nbsp;<span class="unit">万</span></span>
-                                        <label>已完成的合同金额</label>
+                                        <label>已完成*****</label>
                                     </div>
                                 </div>
                             </li>
@@ -231,7 +231,7 @@
                                     <div class="work-item gray">
                                          <i class="iconfont">&#xe620;</i>
                                         <span class="num">10&nbsp;<span class="unit">个</span></span>
-                                        <label>供应商开发</label>
+                                        <label>*****</label>
                                     </div>
                                 </div>
                             </li>
@@ -241,7 +241,7 @@
                         <div class="chart0-item">
                             <div class="item-inner">
                                 <div class="item-content">
-                                    <div class="content-hd">货源风险</div>
+                                    <div class="content-hd">各业务板块注册人数</div>
                                     <div class="chart-chart" id="chart0"></div>
                                 </div>
                             </div>
@@ -249,7 +249,7 @@
                         <div class="chart0-item">
                             <div class="item-inner">
                                 <div class="item-content">
-                                    <div class="content-hd">交货准确率</div>
+                                    <div class="content-hd">业务相关工单数</div>
                                     <div class="chart-chart" id="chart1"></div>
                                 </div>
                             </div>
@@ -375,7 +375,7 @@
             legend: {
                 orient : 'vertical',
                 x : 'left',
-                data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎'],
+                data:['职业介绍','困难人员','职业培训','失业金业务','其他'],
                 show:false
             },
             toolbox: {
@@ -402,7 +402,7 @@
             calculable : true,
             series : [
                 {
-                    name:'访问来源',
+                    name:'职业介绍',
                     type:'pie',
                     radius : ['50%', '70%'],
                     itemStyle : {
@@ -426,11 +426,11 @@
                         }
                     },
                     data:[
-                        {value:335, name:'直接访问'},
-                        {value:310, name:'邮件营销'},
-                        {value:234, name:'联盟广告'},
-                        {value:135, name:'视频广告'},
-                        {value:1548, name:'搜索引擎'}
+                        {value:335, name:'困难补贴'},
+                        {value:310, name:'职业培训'},
+                        {value:234, name:'失业金'},
+                        {value:135, name:'职业培训'},
+                        {value:1548, name:'其他'}
                     ]
                 }
             ]
@@ -473,31 +473,31 @@
             ],
             series : [
                 {
-                    name:'邮件营销',
+                    name:'职业介绍',
                     type:'line',
                     stack: '总量',
                     data:[120, 132, 101, 134, 90, 230, 210]
                 },
                 {
-                    name:'联盟广告',
+                    name:'失业金业务',
                     type:'line',
                     stack: '总量',
                     data:[220, 182, 191, 234, 290, 330, 310]
                 },
                 {
-                    name:'视频广告',
+                    name:'困难补贴',
                     type:'line',
                     stack: '总量',
                     data:[150, 232, 201, 154, 190, 330, 410]
                 },
                 {
-                    name:'直接访问',
+                    name:'职业培训',
                     type:'line',
                     stack: '总量',
                     data:[320, 332, 301, 334, 390, 330, 320]
                 },
                 {
-                    name:'搜索引擎',
+                    name:'创业培训',
                     type:'line',
                     stack: '总量',
                     data:[820, 932, 901, 934, 1290, 1330, 1320]

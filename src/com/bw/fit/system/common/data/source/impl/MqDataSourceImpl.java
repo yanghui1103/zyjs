@@ -20,7 +20,7 @@ import com.rabbitmq.client.MessageProperties;
 import com.rabbitmq.client.QueueingConsumer;
 import com.rabbitmq.client.ShutdownSignalException;
 
-@Component
+
 public class MqDataSourceImpl implements MqDataSource {
 
 	@Override

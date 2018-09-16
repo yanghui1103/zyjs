@@ -15,7 +15,7 @@ import com.bw.fit.component.job.entity.TJob;
 import com.bw.fit.system.common.util.QuartzManager;
 import com.bw.fit.system.common.util.Test;
 
-@Component
+
 public class JobRunUtil {
 
     public static String JOB_NAME = "任务调度";  

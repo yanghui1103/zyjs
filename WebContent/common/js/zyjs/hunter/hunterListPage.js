@@ -72,7 +72,7 @@ function openAuditHunter() {
 		var id = row.id;
 		$('#_loadDialog_hunterlist').dialog({
 			title : '招聘方详情',
-			width : 800,
+			width : '100%',
 			height : 500,
 			closed : false,
 			cache : false,
@@ -89,7 +89,7 @@ function openBlackHunter(){
 		var id = row.id;
 		$('#_loadDialog_hunterlist').dialog({
 			title : '招聘方详情',
-			width : 800,
+			width : '100%',
 			height : 500,
 			closed : false,
 			cache : false,

@@ -4,6 +4,7 @@
 *	2，通用的JS方法
 *	3，其他
 ****/
+// var ctx = "http://10.1.9.160:8099/zyjs/";
 var ctx = "http://localhost:8080/zyjs/";
 var prompt_title = "系统提示框";
 

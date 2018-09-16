@@ -62,7 +62,7 @@
                         <li>
                             <a href="javascript:accountInfo();">
                                 <i class="iconfont">&#xe60d;</i>
-                                <span class="pf-opt-name">[${sessionScope.CurrentUser.name }]账户信息</span>
+                                <span class="pf-opt-name">[${sessionScope.CurrentUser.name }]账户</span>
                             </a>
                         </li>
 <!--                          <li class="pf-modify-pwd"> -->
@@ -74,7 +74,7 @@
                         <li class="pf-modify-pwd">
                             <a href="http://www.uimaker.com">
                                 <i class="iconfont">&#xe634;</i>
-                                <span class="pf-opt-name">修改密码</span>
+                                <span class="pf-opt-name">安全</span>
                             </a>
                         </li>
                         <li class="pf-logout">
