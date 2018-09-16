@@ -62,17 +62,11 @@
                         <li>
                             <a href="javascript:accountInfo();">
                                 <i class="iconfont">&#xe60d;</i>
-                                <span class="pf-opt-name">[${sessionScope.CurrentUser.name }]账户</span>
+                                <span class="pf-opt-name"><font size=1>${sessionScope.CurrentUser.name }</font></span>
                             </a>
                         </li>
-<!--                          <li class="pf-modify-pwd"> -->
-<!--                             <a href="http://www.uimaker.com"> -->
-<!--                                 <i class="iconfont">&#xe6f8;</i> -->
-<!--                                 <span class="pf-opt-name">消息<i class="mailtext">[10]</i></span> -->
-<!--                             </a> -->
-<!--                         </li> -->
                         <li class="pf-modify-pwd">
-                            <a href="http://www.uimaker.com">
+                            <a href="#">
                                 <i class="iconfont">&#xe634;</i>
                                 <span class="pf-opt-name">安全</span>
                             </a>

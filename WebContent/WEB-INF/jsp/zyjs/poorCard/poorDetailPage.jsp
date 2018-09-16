@@ -42,7 +42,7 @@
 		</table>
 		
 		<div class="column">
-			<span class="current">简历信息</span>
+			<span class="current">简历信息(含户内其他人员)</span>
 		</div>
 		
        <table id="poorDetailDg"  >

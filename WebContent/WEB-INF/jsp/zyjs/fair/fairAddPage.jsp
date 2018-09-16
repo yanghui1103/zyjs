@@ -29,7 +29,6 @@
 			<select class="easyui-combogrid" name="typeCode" editable="false"
 				style="width: 30%"
 				data-options="limitToList:true,
-					panelWidth: 200,
 					idField: 'dict_value',
 					textField: 'dict_name',
 					url: '<%=basePath%>dict/getDictsByParentValue/fairType',

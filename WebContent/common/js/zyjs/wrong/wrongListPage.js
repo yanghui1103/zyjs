@@ -62,7 +62,7 @@ function wrongReloadgrid() {
 function openAuditwrong() { 
 		$('#_loadDialog_wronglist').dialog({
 			title : '招聘方详情',
-			width : 800,
+			width : '99%',
 			height : 500,
 			closed : false,
 			cache : false,
@@ -75,7 +75,7 @@ function openAuditwrong() {
 function openBlackwrong(){ 
 		$('#_loadDialog_wronglist').dialog({
 			title : '举报详情',
-			width : 800,
+			width : '99%',
 			height : 500,
 			closed : false,
 			cache : false,

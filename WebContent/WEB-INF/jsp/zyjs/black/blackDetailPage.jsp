@@ -45,12 +45,13 @@
 			</div>
 		</div>
 
-		<div title="名单历史" style="padding: 10px">
-			<div title="名单历史" data-options="closable:false" class="basic-info">
+		<div title="对主体操作历史" style="padding: 10px">
+			<div title="对主体操作历史" data-options="closable:false" class="basic-info">
 				<table id="dg" class="easyui-datagrid"  style="width:100%; height: auto">
 					<thead>
 						<tr>
 							<th data-options="field:'itemid',width:250,fixed:true">说明</th>
+							<th data-options="field:'itemid',width:250">操作类型</th>
 							<th data-options="field:'itemid',width:250">操作员</th>
 							<th data-options="field:'itemid',width:250">操作时间</th>
 						</tr>
@@ -58,6 +59,7 @@
 					<tbody>
 						<tr>
 							<td>拉黑你，是我们的责任</td>
+							<td>拉黑</td>
 							<td>李四</td>
 							<td>2018-08-19 12:12:12</td>
 						</tr>

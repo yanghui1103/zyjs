@@ -79,7 +79,7 @@ public class UserController  extends BaseController{
 	@RequestMapping("openUserDetail/{id}")
 	public String openUserDetail(@PathVariable String id,Model model){
 		User user = new User();
-		TUser tu = userDao.get(id);
+		TUser tu = userDao.getByCode(id);
 		PubFun.copyProperties(user, tu);
 		user.setType(dictDao.getDictByValue(user.getType()).getDictName());
 		user.setGender(dictDao.getDictByValue(user.getGender()).getDictName());

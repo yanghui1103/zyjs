@@ -36,7 +36,7 @@ public class AccountDaoImpl implements AccountDao {
 		Account account = new Account();
 		account =  (Account)daoTemplete.getOneData("accountSql.getAccountIdByName", logName);
 		String tempId = account.getId();
-		User user = userService.get(account.getUserId());
+		User user = userService.getByCode(account.getUserId());
 		PubFun.copyProperties(account, user);
 		account.setId(tempId);
 		TOrganization org = getOrgByAccount(logName);
