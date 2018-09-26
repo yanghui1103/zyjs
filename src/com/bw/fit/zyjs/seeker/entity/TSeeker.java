@@ -7,7 +7,7 @@ public class TSeeker extends BaseEntity {
 	private String name;
 	private String education ;
 	private String language;
-	private String LanguageLevel;
+	private String languageLevel;
 	private String wantPlace;
 	private String email;
 	
@@ -31,11 +31,12 @@ public class TSeeker extends BaseEntity {
 	public void setLanguage(String language) {
 		this.language = language;
 	}
+	
 	public String getLanguageLevel() {
-		return LanguageLevel;
+		return languageLevel;
 	}
 	public void setLanguageLevel(String languageLevel) {
-		LanguageLevel = languageLevel;
+		this.languageLevel = languageLevel;
 	}
 	public String getWantPlace() {
 		return wantPlace;

@@ -39,6 +39,7 @@
     	<package name="com.bw.fit.zyjs.seeker.entity"/>
     	<package name="com.bw.fit.zyjs.fair.entity"/>
     	<package name="com.bw.fit.zyjs.innerMail.entity"/>
+    	<package name="com.bw.fit.zyjs.resume.entity"/>
     	
     	
     </typeAliases>

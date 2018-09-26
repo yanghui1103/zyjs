@@ -35,11 +35,11 @@ function seekerlistquery() {
 			width : '10%'
 		}, {
 			field : 'createTime',
-			title : '转招聘方时间',
+			title : '注册时间',
 			width : '20%'
 		}, {
-			field : '意向工作地',
-			title : '状态',
+			field : 'wantPlace',
+			title : '意向工作地',
 			width : '10%'
 		} ] ],
 		fit : false,
@@ -51,8 +51,10 @@ function seekerlistquery() {
 		pageNumber : 1,
 		pageSize : 10,
 		pageList : [ 10, 20, 30, 40, 50 ],
-		striped : true
-	// 奇偶行是否区分
+		striped : true, //奇偶行是否区分                 
+        onDblClickRow: function (index, row) {  
+       	 openDetail(row.id); 
+        }     
 	});
 }
 
@@ -89,8 +91,8 @@ function openBlackseeker(){
 	if (row != null) {
 		var id = row.id;
 		$('#_loadDialog_seekerlist').dialog({
-			title : '招聘方详情',
-			width : 800,
+			title : '求职者详情',
+			width : '100%',
 			height : 500,
 			closed : false,
 			cache : false,
@@ -99,4 +101,18 @@ function openBlackseeker(){
 			modal : true
 		});
 	}
+}
+
+function openDetail(id){
+	$('#_loadDialog_seekerlist').dialog({
+		title : '求职者详情',
+		width : '99%',
+		height : 500,
+		closed : false,
+		cache : false,
+		maximizable : true,
+		href : ctx + 'seeker/seeker/' + id,
+		modal : true
+	});
+	
 }

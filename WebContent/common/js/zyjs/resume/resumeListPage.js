@@ -73,7 +73,7 @@ function openAuditresume() {
 		var id = row.id;
 		$('#_loadDialog_resumelist').dialog({
 			title : '招聘方详情',
-			width : 800,
+			width : '99%',
 			height : 500,
 			closed : false,
 			cache : false,
@@ -87,7 +87,7 @@ function openAuditresume() {
 function openDetail(){ 
 		$('#_loadDialog_resumelist').dialog({
 			title : '简历详情',
-			width : 800,
+			width : '99%',
 			height : 500,
 			closed : false,
 			cache : false,

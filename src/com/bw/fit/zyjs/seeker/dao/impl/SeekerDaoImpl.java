@@ -18,5 +18,10 @@ public class SeekerDaoImpl implements SeekerDao {
 	public List<TSeeker> selectAll(TSeeker s) {
 		return daoTemplete.getListData("seekerSql.all", s);
 	}
+
+	@Override
+	public TSeeker get(String id) {
+		return (TSeeker)daoTemplete.getOneData("seekerSql.get", id);
+	}
 	
 }

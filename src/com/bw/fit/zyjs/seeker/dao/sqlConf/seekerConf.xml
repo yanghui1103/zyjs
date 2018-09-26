@@ -7,21 +7,14 @@
 		</if>
 	</sql>
 	
-	<update id="updateExtenalUserStatus" parameterType="map">
-		update  ${tableName}  set isdeleted = #{isdeleted,jdbcType=VARCHAR} where id = #{id,jdbcType=VARCHAR}
-	</update>
+	<select id="get" parameterType="String" resultType="tseeker">
+		select a.*,p.phone temp_str1 from t_seeker a,t_person p where a.foreignid = p.id and a.id = #{id,jdbcType=VARCHAR}
+	</select>
 	
 	<select id="getExtenalType" parameterType="String" resultType="TEsta">
 		select * from (select tc.id,'t_company' temp_str1  from t_company tc
     		union all
     	select ta.id,'t_person' temp_str1 from t_person ta ) a where a.id =#{id,jdbcType=VARCHAR}
-	</select>
-	
-	<select id="get" parameterType="string" resultType="tHunter">
-		select e.id,e.status,a.name,a.email,a.phone,a.address,a.scale,a.comptype,
-		a.industry,a.introduction ,a.neturl,a.cardid 
-		from t_employer e,t_company a where a.id = e.foreignid 
-		and a.isdeleted = e.isdeleted and e.isdeleted='0' and e.id =  #{id,jdbcType=VARCHAR}
 	</select>
 	
 	<update id="update" parameterType="tHunter"> 

@@ -15,6 +15,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.bw.fit.system.common.controller.BaseController;
 import com.bw.fit.system.dict.service.DictService;
 import com.bw.fit.zyjs.hunter.model.Hunter;
+import com.bw.fit.zyjs.resume.dao.ResumeDao;
+import com.bw.fit.zyjs.resume.entity.TResume;
+import com.bw.fit.zyjs.seeker.dao.SeekerDao;
+import com.bw.fit.zyjs.seeker.entity.TSeeker;
 import com.bw.fit.zyjs.seeker.model.Seeker;
 import com.bw.fit.zyjs.seeker.service.SeekerService;
 
@@ -26,6 +30,10 @@ public class SeekerController extends BaseController {
 	private SeekerService seekerService;
 	@Autowired
 	private DictService dictService;
+	@Autowired
+	private SeekerDao seekerDao;
+	@Autowired
+	private ResumeDao resumeDao;
 
 	@RequestMapping("gotoSeekersPage/{area}")
 	public String git(@PathVariable String area,Model model ){
@@ -46,4 +54,21 @@ public class SeekerController extends BaseController {
 		return (JSONArray) JSONArray.toJSON(Seekers);
 	}
 	
+	@RequestMapping(value="seeker/{id}",method=RequestMethod.GET)
+	public String get(@PathVariable String id,Model model){
+		TSeeker tk = seekerDao.get(id);
+		model.addAttribute("seeker", tk);
+		List<TResume> rs = resumeDao.getResumes(id);
+		model.addAttribute("resumes", rs);
+		return "zyjs/seeker/seekerDetailPage";
+	}
+	
+	@RequestMapping(value="black/{id}",method=RequestMethod.GET)
+	public String black(@PathVariable String id,Model model){
+		TSeeker tk = seekerDao.get(id);
+		model.addAttribute("seeker", tk);
+		List<TResume> rs = resumeDao.getResumes(id);
+		model.addAttribute("resumes", rs);
+		return "zyjs/seeker/seekerBlackPage";
+	}
 }

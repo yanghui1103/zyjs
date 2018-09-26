@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="resumeSql"> 
+	<update id="updateExtenalUserStatus" parameterType="map">
+		update  ${tableName}  set isdeleted = #{isdeleted,jdbcType=VARCHAR} where id = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="getExtenalType" parameterType="String" resultType="TEsta">
+		select * from (select tc.id,'t_company' temp_str1  from t_company tc
+    		union all
+    	select ta.id,'t_person' temp_str1 from t_person ta ) a where a.id =#{id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="get" parameterType="string" resultType="tresume">
+		select  * from t_resume where id =  #{id,jdbcType=VARCHAR}
+	</select>
+	
+	<update id="update" parameterType="tHunter"> 
+		update t_employer set status = #{status} where id = #{id}
+	</update>
+	
+	<select id="selectAll" parameterType="String" resultType="tHunter">
+		select c.email,c.address,c.name,c.scale,c.comptype,c.industry,c.neturl,c.cardid,c.introduction 
+		,a.id,a.foreignid,a.createTime,a.status
+		from t_employer  a ,t_company c where c.id = a.foreignid and a.isdeleted = c.isdeleted and c.isdeleted='0' 
+		and  c.name like '%'||#{keyWords,jdbcType=VARCHAR}||'%' 
+		<if test="area!=''">
+			and c.area = #{area}
+		</if>
+	</select>
+	
+	<select id="getResumes" parameterType="String" resultType="tresume">
+		select tr.*		from t_resume tr where tr.isdeleted='0' and tr.seekerid=#{seekerId,jdbcType=VARCHAR}
+	</select>
+</mapper>   

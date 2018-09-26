@@ -17,7 +17,7 @@
 		<div class="hd-inner">
 			<span class="logo"></span>
 			<span class="split"></span>
-			<span class="sys-name">协同平台</span>
+			<span class="sys-name">旗区就业服务局综合业务管理平台</span>
 		</div>
 	</div>
 	<div class="login-bd">
@@ -60,7 +60,7 @@
 		<div class="ft-inner">
 			<div class="about-us">
 			</div>
-			<div class="address">地址：内蒙古鄂尔多斯市东胜区天骄北路&nbsp;邮编：210019&nbsp;&nbsp;Copyright&nbsp;©&nbsp;2015&nbsp;-&nbsp;2016&nbsp;&nbsp;版权所有</div>
+			<div class="address">地址：内蒙古鄂尔多斯市东胜区&nbsp;邮编：210019&nbsp;&nbsp;Copyright&nbsp;©&nbsp;2015&nbsp;-&nbsp;2016&nbsp;&nbsp;版权所有</div>
 		</div>
 	</div>
 	<script type="text/javascript">

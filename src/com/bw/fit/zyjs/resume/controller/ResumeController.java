@@ -41,4 +41,6 @@ public class ResumeController extends BaseController {
 	public String detail(){
 		return "zyjs/resume/resumeDetailPage";
 	}
+	
+	
 }
