@@ -10,9 +10,16 @@ public class TSeeker extends BaseEntity {
 	private String languageLevel;
 	private String wantPlace;
 	private String email;
+	private String workStatus;
 	
 	
 	
+	public String getWorkStatus() {
+		return workStatus;
+	}
+	public void setWorkStatus(String workStatus) {
+		this.workStatus = workStatus;
+	}
 	public String getName() {
 		return name;
 	}

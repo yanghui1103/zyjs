@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.bw.fit.system.common.dao.DaoTemplete;
 import com.bw.fit.zyjs.resume.dao.ResumeDao;
 import com.bw.fit.zyjs.resume.entity.TResume;
+import com.github.pagehelper.PageHelper;
 @Repository
 public class ResumeDaoImpl implements ResumeDao {
 
@@ -22,6 +23,12 @@ public class ResumeDaoImpl implements ResumeDao {
 	@Override
 	public TResume get(String id) {
 		return (TResume)daoTemplete.getOneData("resumeSql.get", id);
+	}
+
+	@Override
+	public List<TResume> selectAll(TResume resume) {
+		PageHelper.startPage(resume.getPage(), resume.getRows());
+		return daoTemplete.getListData("resumeSql.selectAll", resume);
 	}
 
 }

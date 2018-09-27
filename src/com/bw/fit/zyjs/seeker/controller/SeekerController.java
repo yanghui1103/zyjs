@@ -57,6 +57,7 @@ public class SeekerController extends BaseController {
 	@RequestMapping(value="seeker/{id}",method=RequestMethod.GET)
 	public String get(@PathVariable String id,Model model){
 		TSeeker tk = seekerDao.get(id);
+		tk.setWorkStatus("1".equals(tk.getWorkStatus())?"已找到工作":"正在寻找工作");
 		model.addAttribute("seeker", tk);
 		List<TResume> rs = resumeDao.getResumes(id);
 		model.addAttribute("resumes", rs);

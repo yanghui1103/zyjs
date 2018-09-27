@@ -19,14 +19,12 @@
 		update t_employer set status = #{status} where id = #{id}
 	</update>
 	
-	<select id="selectAll" parameterType="String" resultType="tHunter">
-		select c.email,c.address,c.name,c.scale,c.comptype,c.industry,c.neturl,c.cardid,c.introduction 
-		,a.id,a.foreignid,a.createTime,a.status
-		from t_employer  a ,t_company c where c.id = a.foreignid and a.isdeleted = c.isdeleted and c.isdeleted='0' 
-		and  c.name like '%'||#{keyWords,jdbcType=VARCHAR}||'%' 
-		<if test="area!=''">
-			and c.area = #{area}
-		</if>
+	<select id="selectAll" parameterType="String" resultType="tresume">
+		select a.id,a.seekerid,a.jobname,a.major,a.years,a.background,a.welware,a.reward,a.evaluate,a.remark,se.name temp_str1,a.createTime
+ 		from t_resume a,t_seeker se,t_person p where se.id = a.seekerid  and p.id = se.foreignid and a.isdeleted='0' and se.isdeleted='0' 
+ 		and p.isdeleted='0' and ( p.phone like '%'||#{keyWords,jdbcType=VARCHAR}||'%' 
+ 		or  se.name like '%'||#{keyWords,jdbcType=VARCHAR}||'%'
+ 		or  a.jobname like '%'||#{keyWords,jdbcType=VARCHAR}||'%') 		
 	</select>
 	
 	<select id="getResumes" parameterType="String" resultType="tresume">

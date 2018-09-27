@@ -10,6 +10,16 @@ public class Seeker extends BaseModel {
 	private String LanguageLevel;
 	private String wantPlace;
 	private String email;
+	private String workStatus;
+	
+	
+	
+	public String getWorkStatus() {
+		return workStatus;
+	}
+	public void setWorkStatus(String workStatus) {
+		this.workStatus = workStatus;
+	}
 	
 	
 	

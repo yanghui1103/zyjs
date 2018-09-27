@@ -14,4 +14,7 @@ public interface ResumeDao {
 	public List<TResume> getResumes(String seekerId);
 	
 	public TResume get(String id);
+	
+	public List<TResume> selectAll(TResume resume);
+	
 }

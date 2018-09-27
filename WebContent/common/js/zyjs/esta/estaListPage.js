@@ -53,7 +53,7 @@ function openExUserDetail(id,type){
 	if(type == '企业'){
 		$('#_loadDialog_estalist').dialog({    
 		    title: '外部用户详情',    
-		    width: 800,    
+		    width: '99%',    
 		    height: 500,    
 		    closed: false,    
 		    cache: false,    
@@ -64,7 +64,7 @@ function openExUserDetail(id,type){
 	}else{
 		$('#_loadDialog_estalist').dialog({    
 		    title: '外部用户详情',    
-		    width: 800,    
+		    width: '99%',    
 		    height: 500,    
 		    closed: false,    
 		    cache: false,    
@@ -80,7 +80,7 @@ function openInnerMail(){
 	if(row !=null){
 		$('#_loadDialog_estalist').dialog({    
 		    title: '发送站内信',    
-		    width: '100%',
+		    width: '99%',    
 		    height: 500,    
 		    closed: false,    
 		    cache: false,    

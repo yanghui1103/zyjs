@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="estaSql"> 
+<mapper namespace="blackSql"> 
 	<sql id="areaSql">
 		<if test="area!=''">
-			and a.area = #{area,jdbcType=VARCHAR}
+			and a.area = #{area}
 		</if>
 	</sql>
-	<select id="selectAll" parameterType="TEsta" resultType="TEsta">
-		select * from (select tc.id,'企业' temp_str1,tc.email phone,tc.createtime,tc.name,isdeleted,area from t_company tc
-		union all
-		select ta.id,'个人' temp_str1,ta.phone,ta.createtime,'' name,isdeleted,area from t_person ta ) a
-		where 1=1 and ( a.name like '%'||#{keyWords,jdbcType=VARCHAR}||'%' 
-		or a.phone  like '%'||#{keyWords,jdbcType=VARCHAR}||'%'
-		or a.temp_str1  like '%'||#{keyWords,jdbcType=VARCHAR}||'%' )
-		<include refid="areaSql" />
-		order by a.createTime desc
+	<select id="selectAll" parameterType="Tblack" resultType="Tblack">
+		select * from t_blacklist a 
 	</select>
 	
 	<update id="updateExtenalUserStatus" parameterType="map">

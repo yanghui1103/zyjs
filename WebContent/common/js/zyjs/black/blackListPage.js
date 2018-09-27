@@ -17,21 +17,21 @@ function blacklistquery() {
 			field : 'id',
 			hidden : true
 		}, {
-			field : 'name',
+			field : 'temp_str1',
 			title : '主体名称',
 			width : '20%',
 			fixed : true
 		}, {
-			field : 'compType',
+			field : 'oType',
 			title : '类型',
 			width : '20%'
 		}, {
-			field : 'industry',
+			field : 'temp_str2',
 			title : '账号',
 			width : '20%'
 		}, {
-			field : 'scale',
-			title : '入网时间',
+			field : 'createTime',
+			title : '操作时间',
 			width : '30%'
 		} ] ],
 		fit : false,

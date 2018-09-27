@@ -17,7 +17,7 @@ function resumelistquery() {
 			field : 'id',
 			hidden : true
 		}, {
-			field : 'name',
+			field : 'temp_str1',
 			title : '姓名',
 			width : '20%',
 			fixed : true
@@ -51,8 +51,10 @@ function resumelistquery() {
 		pageNumber : 1,
 		pageSize : 10,
 		pageList : [ 10, 20, 30, 40, 50 ],
-		striped : true
-	// 奇偶行是否区分
+		striped : true, //奇偶行是否区分                 
+        onDblClickRow: function (index, row) {  
+          	 openDetail(row.id); 
+           }     
 	});
 }
 
@@ -67,24 +69,8 @@ function resumeReloadgrid() {
 	$("#resumelistDg").datagrid('reload');
 }
 
-function openAuditresume() {
-	var row = getSingleTreeGridSelectData($("#resumelistDg"));
-	if (row != null) {
-		var id = row.id;
-		$('#_loadDialog_resumelist').dialog({
-			title : '招聘方详情',
-			width : '99%',
-			height : 500,
-			closed : false,
-			cache : false,
-			maximizable : true,
-			href : ctx + 'resume/audit/' + id,
-			modal : true
-		});
-	}
-}
 
-function openDetail(){ 
+function openDetail(id){ 
 		$('#_loadDialog_resumelist').dialog({
 			title : '简历详情',
 			width : '99%',
@@ -92,7 +78,7 @@ function openDetail(){
 			closed : false,
 			cache : false,
 			maximizable : true,
-			href : ctx + 'resume/resume/1' ,
+			href : ctx + 'resume/resume/'+id ,
 			modal : true
 		});
 }
