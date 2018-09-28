@@ -46,6 +46,8 @@ public class BlackController  extends BaseController{
 				if(op.isPresent()){
 					x.setTemp_str1(op.get().getName());
 					x.setTemp_str2(op.get().getTemp_str1().equals("个人")?op.get().getPhone():op.get().getEmail());
+					x.setoType(op.get().getTemp_str1());
+					x.setTemp_str3(op.get().getId());
 					return true;
 				}else{
 					return false ;

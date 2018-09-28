@@ -81,9 +81,9 @@ public class UserController  extends BaseController{
 		User user = new User();
 		TUser tu = userDao.getByCode(id);
 		PubFun.copyProperties(user, tu);
-		user.setType(dictDao.getDictByValue(user.getType()).getDictName());
-		user.setGender(dictDao.getDictByValue(user.getGender()).getDictName());
-		user.setIsVisible(dictDao.getDictByValue(user.getIsVisible()).getDictName());
+		user.setType(dictDao.getDictByValue(user.getType())==null?"":dictDao.getDictByValue(user.getType()).getDictName());
+		user.setGender(dictDao.getDictByValue(user.getGender())==null?"":dictDao.getDictByValue(user.getGender()).getDictName());
+		user.setIsVisible(dictDao.getDictByValue(user.getIsVisible())==null?"":dictDao.getDictByValue(user.getIsVisible()).getDictName());
 		model.addAttribute("user", user);
 		return "system/user/userDetailPage";
 	}	

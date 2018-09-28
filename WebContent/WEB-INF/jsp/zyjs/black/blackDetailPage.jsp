@@ -51,9 +51,9 @@
 					<thead>
 						<tr>
 							<th data-options="field:'itemid',width:250,fixed:true">说明</th>
-							<th data-options="field:'itemid',width:250">操作类型</th>
-							<th data-options="field:'itemid',width:250">操作员</th>
-							<th data-options="field:'itemid',width:250">操作时间</th>
+							<th data-options="field:'itemid2',width:250">操作类型</th>
+							<th data-options="field:'itemid3',width:250">操作员</th>
+							<th data-options="field:'itemid4',width:250">操作时间</th>
 						</tr>
 					</thead>
 					<tbody>

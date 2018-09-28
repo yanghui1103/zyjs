@@ -28,9 +28,11 @@
         	用户姓名: <input class="easyui-textbox" type="text" name="name" style="width:166px;height:35px;line-height:35px;"></input>
         	账号: <input class="easyui-textbox" type="text" name="logName" style="width:166px;height:35px;line-height:35px;"></input>
         <a href="javascript:accountReloadgrid();" class="easyui-linkbutton" iconCls="icon-search" data-options="selected:true">查询</a> 
+                <shiro:hasRole name="OPT_ACNT"> 
         <a href="javascript:openAddAccount();" class="easyui-linkbutton" iconCls="icon-add" >新增</a> 
         <a href="javascript:openTransferAccount();" class="easyui-linkbutton" iconCls="icon-edit" >过户</a> 
         <a href="javascript:deleteAccount();" class="easyui-linkbutton" iconCls="icon-remove" >作废</a> 
+        </shiro:hasRole>
         </form>
       </div>  
       

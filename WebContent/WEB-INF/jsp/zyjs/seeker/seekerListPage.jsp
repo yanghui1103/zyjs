@@ -27,9 +27,14 @@
 			关键词: <input class="easyui-textbox" type="text" name="keyWords"
 				style="width: 166px; height: 35px; line-height: 35px;"></input> <a
 				href="javascript:seekerReloadgrid();" class="easyui-linkbutton"
-				iconCls="icon-search" data-options="selected:true">查询</a> <a
-				href="javascript:openBlackseeker();" class="easyui-linkbutton"
-				iconCls="icon-remove">拉黑/拉白</a><a
+				iconCls="icon-search" data-options="selected:true">查询</a> 
+				   <shiro:hasRole name="SEKRADMIN"> 
+				<a 	href="javascript:openBlackseeker();" class="easyui-linkbutton"
+				iconCls="icon-remove">拉黑/拉白</a>
+				
+				</shiro:hasRole>
+				   <shiro:hasRole name="SERKPK"> 
+				<a
 				href="#" class="easyui-linkbutton"
 				iconCls="icon-remove">指定为建档立卡户户主</a><a
 				href="#" class="easyui-linkbutton"
@@ -38,6 +43,7 @@
 				iconCls="icon-remove">指定为城镇就业困难户户主</a><a
 				href="#" class="easyui-linkbutton"
 				iconCls="icon-remove">取消城镇就业困难户户主</a>
+				</shiro:hasRole>
 		</form>
 		<input name="area" id="seekerlistFMarea" value="${area }"
 			type="hidden">

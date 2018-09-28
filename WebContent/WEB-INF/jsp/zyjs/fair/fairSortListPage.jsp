@@ -26,7 +26,10 @@
 		<form id="fairlistFM">
         	关键词: <input class="easyui-textbox" type="text" name="keyWords" style="width:166px;height:35px;line-height:35px;"></input>
         	<a href="javascript:fairReloadgrid();" class="easyui-linkbutton" iconCls="icon-search" data-options="selected:true">查询</a> 
+        	
+			<shiro:hasRole name="FAIRHUNST"> 
         	<a href="javascript:openSortfair();" class="easyui-linkbutton" iconCls="icon-add" >排序</a> 
+        	</shiro:hasRole>
         </form>
         <input name="area" id="fairlistFMarea" value="${area }" type="hidden">
       </div>

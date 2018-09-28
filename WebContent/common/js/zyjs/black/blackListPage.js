@@ -16,10 +16,13 @@ function blacklistquery() {
 		columns : [ [ {
 			field : 'id',
 			hidden : true
+		},{
+			field : 'temp_str3',
+			hidden : true
 		}, {
 			field : 'temp_str1',
 			title : '主体名称',
-			width : '20%',
+			width : '30%',
 			fixed : true
 		}, {
 			field : 'oType',
@@ -43,11 +46,39 @@ function blacklistquery() {
 		pageNumber : 1,
 		pageSize : 10,
 		pageList : [ 10, 20, 30, 40, 50 ],
-		striped : true
-	// 奇偶行是否区分
+		striped : true, //奇偶行是否区分                 
+        onDblClickRow: function (index, row) {  
+       	 openExUserDetail(row.temp_str3,row.oType); 
+        }     
 	});
 }
 
+
+function openExUserDetail(id,type){
+	if(type == '企业'){
+		$('#_loadDialog_blacklist').dialog({    
+		    title: '企业用户详情',    
+		    width: '99%',    
+		    height: 500,    
+		    closed: false,    
+		    cache: false,    
+		    maximizable:true,
+		    href: ctx+'esta/gotoDetail/'+id,    
+		    modal: true   
+		}); 	
+	}else{
+		$('#_loadDialog_blacklist').dialog({    
+		    title: '个人用户详情',    
+		    width: '99%',    
+		    height: 500,    
+		    closed: false,    
+		    cache: false,    
+		    maximizable:true,
+		    href: ctx+'person/person/'+id,    
+		    modal: true   
+		}); 	
+	}
+}
 // 增加查询参数，在页面加载时运行
 function blackReloadgrid() {
 	$('#blacklistDg').datagrid('loadData', {

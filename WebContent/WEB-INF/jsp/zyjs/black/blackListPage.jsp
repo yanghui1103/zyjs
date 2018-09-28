@@ -27,9 +27,9 @@
 		<form id="blacklistFM">
         	关键词: <input class="easyui-textbox" type="text" name="keyWords" style="width:166px;height:35px;line-height:35px;"></input>
         	<a href="javascript:blackReloadgrid();" class="easyui-linkbutton" iconCls="icon-search" data-options="selected:true">查询</a> 
-        	<a href="javascript:openBlackDetail();" class="easyui-linkbutton" iconCls="icon-remove" >详情</a> 
+        	<a href="javascript:openBlackDetail();" class="easyui-linkbutton" iconCls="icon-remove" >操作历史</a> 
         </form>
-        <input name="area" id="blacklistFMarea" value="${area }" type="hidden">
+        <input name="area" id="blacklistFMarea" value="${arg }" type="hidden">
       </div>
        <table id="blacklistDg" style="width:100%;height:480px;" >
         </table>

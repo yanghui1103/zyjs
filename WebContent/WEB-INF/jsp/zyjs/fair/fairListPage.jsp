@@ -26,10 +26,13 @@
 		<form id="fairlistFM">
         	关键词: <input class="easyui-textbox" type="text" name="keyWords" style="width:166px;height:35px;line-height:35px;"></input>
         	<a href="javascript:fairReloadgrid();" class="easyui-linkbutton" iconCls="icon-search" data-options="selected:true">查询</a> 
-        	<a href="javascript:openAddfair();" class="easyui-linkbutton" iconCls="icon-add" >新增</a> 
+        	
+			<shiro:hasRole name="FAIRAFM"> 
+			<a href="javascript:openAddfair();" class="easyui-linkbutton" iconCls="icon-add" >新增</a> 
         	<a href="javascript:closefair();" class="easyui-linkbutton" iconCls="icon-remove" >关闭招聘会</a> 
         	<a href="javascript:startfair();" class="easyui-linkbutton" iconCls="icon-add" >开启招聘会</a> 
         	<a href="javascript:openEditfair();" class="easyui-linkbutton" iconCls="icon-edit" >修改</a> 
+        	</shiro:hasRole>
         </form>
         <input name="area" id="fairlistFMarea" value="${area }" type="hidden">
       </div>

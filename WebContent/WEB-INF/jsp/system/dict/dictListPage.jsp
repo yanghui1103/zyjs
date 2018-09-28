@@ -25,9 +25,11 @@
 </head>
 <body>
 	<div style="float:right;padding:0px 1px">
+        <shiro:hasRole name="OP_DDICT"> 
 		<a class="easyui-linkbutton" iconcls="icon-add" onclick="javascript:addDictDlg();">增加</a>
 		<a class="easyui-linkbutton" iconcls="icon-edit" onclick="javascript:editDictDlg();">修改</a>
 		<a class="easyui-linkbutton" iconcls="icon-remove" onclick="javascript:deleteDict();">删除</a>
+		</shiro:hasRole>	
 	</div>
 	<div id="_loadDialog_dictList"></div>
 	<table title="数据字典列表" id="dataDictTreeGd"  class="easyui-treegrid" style="width:100%;height:100%"

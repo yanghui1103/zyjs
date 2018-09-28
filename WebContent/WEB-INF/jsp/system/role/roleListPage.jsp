@@ -27,12 +27,17 @@
 		<form id="rolelistFM">
         	关键词: <input class="easyui-textbox"   type="text" name="keyWords" style="width:166px;height:35px;line-height:35px;"></input>
         <a href="javascript:roleReloadgrid();" class="easyui-linkbutton" iconCls="icon-search" data-options="selected:true">查询</a> 
-        <a href="javascript:openAddRole();" class="easyui-linkbutton" iconCls="icon-add" >新增</a> 
+         <shiro:hasRole name="OPT_ROLRUSR"> 
         <a href="javascript:openAssignAccount();" class="easyui-linkbutton" iconCls="icon-edit" >分配账号</a> 
+        </shiro:hasRole>
+         <shiro:hasRole name="OPT_ROLEATH"> 
+         <a href="javascript:openAddRole();" class="easyui-linkbutton" iconCls="icon-add" >新增</a> 
         <a href="javascript:openRole2AuthPage();" class="easyui-linkbutton" iconCls="icon-edit" >配置功能权限</a> 
         <a href="javascript:openRole2DataAuthPage();" class="easyui-linkbutton" iconCls="icon-edit" >配置数据权限</a> 
         <a href="javascript:openRole2MenuPage();" class="easyui-linkbutton" iconCls="icon-edit" >配置菜单权限</a> 
         <a href="javascript:deleteRole();" class="easyui-linkbutton" iconCls="icon-remove" >删除</a> 
+        </shiro:hasRole>
+        
         </form>
       </div>      
        <table id="roleListDg" style="width:100%;height:480px;" >
