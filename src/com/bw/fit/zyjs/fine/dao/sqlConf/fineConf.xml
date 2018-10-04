@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fineSql"> 
+	<sql id="areaSql">
+		<if test="area!=''">
+			and a.area = #{area}
+		</if>
+	</sql>
+	
+	<select id="selectAll" parameterType="tfine" resultType="tfine">
+		select *from t_fine  a
+ 		 where a.isdeleted='0' and a.title  like '%'||#{keyWords,jdbcType=VARCHAR}||'%'
+		<include refid="areaSql" />
+		order by versionTime desc
+	</select>
+	
+	<update id="update" parameterType="tfine">
+		update  t_fine  set versionTime=sysdate,operator=#{creator,jdbcType=VARCHAR},
+		isdeleted = #{isdeleted,jdbcType=VARCHAR} 
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	
+</mapper>   

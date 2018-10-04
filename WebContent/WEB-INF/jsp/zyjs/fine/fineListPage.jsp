@@ -24,21 +24,21 @@
 </head> 
 <body>
       <div id="tb" style="padding:0 30px;">
-		<form id="blacklistFM">
+		<form id="finelistFM">
         	关键词: <input class="easyui-textbox" type="text" name="keyWords" style="width:166px;height:35px;line-height:35px;"></input>
-        	<a href="javascript:blackReloadgrid();" class="easyui-linkbutton" iconCls="icon-search" data-options="selected:true">查询</a> 
+        	<a href="javascript:fineReloadgrid();" class="easyui-linkbutton" iconCls="icon-search" data-options="selected:true">查询</a> 
 			<shiro:hasRole name="FINEADM"> 
-        	<a href="javascript:openBlackDetail();" class="easyui-linkbutton" iconCls="icon-remove" >新增</a> 
-        	<a href="javascript:openBlackDetail();" class="easyui-linkbutton" iconCls="icon-remove" >置顶</a>  
-        	<a href="javascript:openBlackDetail();" class="easyui-linkbutton" iconCls="icon-remove" >删除</a>    
+        	<a href="javascript:addFine();" class="easyui-linkbutton" iconCls="icon-remove" >新增</a> 
+        	<a href="javascript:firstFine();" class="easyui-linkbutton" iconCls="icon-remove" >置顶</a>  
+        	<a href="javascript:deleteFine();" class="easyui-linkbutton" iconCls="icon-remove" >删除</a>    
         	</shiro:hasRole>    	
         </form>
-        <input name="area" id="blacklistFMarea" value="${arg }" type="hidden">
+        <input name="area" id="finelistFMarea" value="${arg }" type="hidden">
       </div>
-       <table id="blacklistDg" style="width:100%;height:480px;" >
+       <table id="finelistDg" style="width:100%;height:480px;" >
         </table>
-        <div id="_loadDialog_blacklist"></div>
+        <div id="_loadDialog_finelist"></div>
 </body> 
-	<script type="text/javascript" src="<%=basePath%>common/js/zyjs/black/blackListPage.js"></script>
+	<script type="text/javascript" src="<%=basePath%>common/js/zyjs/fine/fineListPage.js"></script>
 
 </html>
