@@ -52,7 +52,7 @@ function openLogDetail(){
 	var row = getSingleTreeGridSelectData($("#logListDg"));
 	$('#_loadDialog_loglist').dialog({    
 	    title: '日志详情',    
-	    width: 800,    
+	    width: '90%',    
 	    height: 500,    
 	    closed: false,    
 	    cache: false,    

@@ -19,7 +19,7 @@
 <!-- 		location="file:/data/tomcat72/jndi/jdbc_zjs.properties" />  -->
 		
 	<!-- 配置c3p0数据源 class="com.mchange.v2.c3p0.ComboPooledDataSource" -->
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="${jdbc.driverClassName}" />
 		<property name="jdbcUrl" value="${jdbc.url}" />
 		<property name="user" value="${jdbc.username}" />
