@@ -42,7 +42,7 @@ function seekerlistquery() {
 			title : '意向工作地',
 			width : '10%'
 		} ] ],
-		fit : false,
+		fit : true,
 		idField : "id",
 		pagination : true,
 		singleSelect : true,

@@ -37,7 +37,7 @@ function blacklistquery() {
 			title : '操作时间',
 			width : '30%'
 		} ] ],
-		fit : false,
+		fit : true,
 		idField : "id",
 		pagination : true,
 		singleSelect : true,

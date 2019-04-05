@@ -22,7 +22,7 @@ function listquery(){
                    { field: 'result', title: '返回值', width: '20%' },
                    { field: 'createTime', title: '执行时间', width: '20%' }
                ]],
-             fit: false ,    
+             fit: true ,    
              idField: "id",
              pagination: true,
              singleSelect:true,

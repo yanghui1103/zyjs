@@ -27,6 +27,7 @@ import com.bw.fit.system.common.util.PubFun;
 import com.bw.fit.system.dict.service.DictService;
 import com.bw.fit.zyjs.fair.dao.FairDao;
 import com.bw.fit.zyjs.fair.entity.TFair;
+import com.bw.fit.zyjs.fair.entity.TJobp;
 import com.bw.fit.zyjs.fair.model.Fair;
 import com.bw.fit.zyjs.fair.service.FairService;
 import com.bw.fit.zyjs.hunter.model.Hunter;
@@ -72,6 +73,15 @@ public class FairController  extends BaseController{
 		return "zyjs/fair/fairDetailPage";
 	}
 	
+
+	@RequestMapping(value="job/{id}",method=RequestMethod.GET)
+	public String jobdetail(@PathVariable String id,Model model){
+		TJobp f = fairDao.getJobDetail(id);
+		f.setCreator(accountService.get(f.getCreator()).getName());
+		model.addAttribute("job", f);
+		return "zyjs/job/jobDetailPage";
+	}
+	
 	@RequestMapping(value="update/{id}",method=RequestMethod.GET)
 	public String update(@PathVariable String id,Model model){
 		Fair f = fairService.get(id);
@@ -101,6 +111,23 @@ public class FairController  extends BaseController{
 		return (JSONArray)JSONArray.toJSON(hs);
 	}
 
+
+	@RequestMapping(value="jobs/{area}",method=RequestMethod.GET)
+	@ResponseBody
+	public JSONArray jobs(@PathVariable String area,@ModelAttribute Fair fair){
+		TFair t = new TFair();
+		PubFun.copyProperties(t, fair);
+		t.setArea(area);
+		java.util.List<TJobp> list = fairDao.allJobs(t);
+		if(list !=null){
+			for(TJobp tt:list){ 
+			}
+			return (JSONArray)JSONArray.toJSON(list) ;
+		}else{
+			return null ;
+		}
+	}
+	
 	@RequestMapping(value="fairAdd/{area}",method=RequestMethod.GET)
 	public String add(@PathVariable String area,Model model){
 		model.addAttribute("area", area);
@@ -145,6 +172,15 @@ public class FairController  extends BaseController{
 	public JSONObject close(@PathVariable String id) throws RbackException{
 		JSONObject json = new JSONObject();
 		json = fairService.updateStatus(id,"ended");		
+		return json  ;
+	}
+	
+	
+	@RequestMapping(value="delJob/{id}",method=RequestMethod.PUT)
+	@ResponseBody
+	public JSONObject delJob(@PathVariable String id) throws RbackException{
+		JSONObject json = new JSONObject();
+		json = fairService.delJob(id);		
 		return json  ;
 	}
 

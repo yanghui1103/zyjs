@@ -37,7 +37,7 @@ function kindlistquery() {
 			title : '是否审核',
 			width : '10%'
 		}  ] ],
-		fit : false,
+		fit : true,
 		idField : "id",
 		pagination : true,
 		singleSelect : true,

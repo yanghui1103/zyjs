@@ -33,7 +33,7 @@ function finelistquery() {
 			title : '发布者',
 			width : '30%'
 		} ] ],
-		fit : false,
+		fit : true,
 		idField : "id",
 		pagination : true,
 		singleSelect : true,

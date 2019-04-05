@@ -41,7 +41,7 @@ function hunterlistquery() {
 			title : '状态',
 			width : '10%'
 		} ] ],
-		fit : false,
+		fit : true,
 		idField : "id",
 		pagination : true,
 		singleSelect : true,

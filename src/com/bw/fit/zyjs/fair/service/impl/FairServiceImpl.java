@@ -107,4 +107,21 @@ public class FairServiceImpl implements FairService {
 		}
 	}
 
+	@Override
+	public JSONObject delJob(String jobId) throws RbackException {
+		JSONObject json = new JSONObject(); 
+		try {
+			fairDao.delJob(jobId);
+			json.put("res", "2");
+			json.put("msg", "执行成功");
+		} catch (RbackException e) {
+			json = new JSONObject();
+			json.put("res", "1");
+			json.put("msg", e.getMsg());
+			throw e;
+		}finally{
+			return json ;
+		}
+	}
+
 }

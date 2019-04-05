@@ -11,9 +11,38 @@ public class TSeeker extends BaseEntity {
 	private String wantPlace;
 	private String email;
 	private String workStatus;
+
+	private String gender;
+	private String huji;
+	private String chuYear;
+	private String minZu;
+		
 	
 	
-	
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public String getHuji() {
+		return huji;
+	}
+	public void setHuji(String huji) {
+		this.huji = huji;
+	}
+	public String getChuYear() {
+		return chuYear;
+	}
+	public void setChuYear(String chuYear) {
+		this.chuYear = chuYear;
+	}
+	public String getMinZu() {
+		return minZu;
+	}
+	public void setMinZu(String minZu) {
+		this.minZu = minZu;
+	}
 	public String getWorkStatus() {
 		return workStatus;
 	}

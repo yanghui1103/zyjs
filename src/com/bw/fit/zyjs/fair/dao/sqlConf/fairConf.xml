@@ -68,4 +68,24 @@
     	select ta.id,'person' temp_str1,ta.phone,ta.createtime,'' name,isdeleted,area,ta.password from t_person ta ) a
     	where a.id = #{id,jdbcType=VARCHAR}
 	</select>
+	
+	<select id="selectAllJobs" parameterType="tFair" resultType="TJobp">
+		select a.*,cp.name temp_str1,f.name temp_str2,
+		(select count(distinct rr.jobpid) from t_resume2job rr where rr.jobpid = a.id) temp_str3 
+		from t_jobs a ,t_job2fair jf ,t_fair f,t_employer ea,t_company cp
+      	where a.id = jf.jobid and jf.fairid = f.id  and a.isdeleted='0' 
+      	and ea.id = a.employerid and ea.foreignid = cp.id 
+		and (a.name like '%'||#{keyWordsjdbcType=VARCHAR}||'%'  or f.name like '%'||#{keyWords,jdbcType=VARCHAR}||'%' 
+  		or a.contactphone like '%'||#{keyWords,jdbcType=VARCHAR}||'%' 
+ 		) and   f.area = #{area,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getJobDetail"  parameterType="tFair" resultType="TJobp">
+		select * from t_jobs a where a.id = #{jobId,jdbcType=VARCHAR}
+	</select>
+	
+	<update id="delJob" parameterType="String" >
+		update t_jobs set isdeleted='1' ,versionTime=sysdate where id = #{jobId,jdbcType=VARCHAR}
+	</update>
+	
 </mapper>   

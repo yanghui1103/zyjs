@@ -9,6 +9,7 @@ import com.bw.fit.system.common.dao.DaoTemplete;
 import com.bw.fit.system.common.model.RbackException;
 import com.bw.fit.zyjs.fair.dao.FairDao;
 import com.bw.fit.zyjs.fair.entity.TFair;
+import com.bw.fit.zyjs.fair.entity.TJobp;
 import com.bw.fit.zyjs.hunter.entity.THunter;
 import com.github.pagehelper.PageHelper;
 @Repository
@@ -46,6 +47,22 @@ public class FairDaoImpl implements FairDao {
 	@Override
 	public void saveSort(THunter t) throws RbackException {
 		daoTemplete.update("fairSql.saveSort", t);
+	}
+
+	@Override
+	public List<TJobp> allJobs(TFair t) {
+		PageHelper.startPage(t.getPage(), t.getRows());
+		return daoTemplete.getListData("fairSql.selectAllJobs", t);
+	}
+
+	@Override
+	public TJobp getJobDetail(String jobId) {
+		return (TJobp)daoTemplete.getOneData("fairSql.getJobDetail", jobId);
+	}
+
+	@Override
+	public void delJob(String jobId) throws RbackException {
+		daoTemplete.update("fairSql.delJob", jobId);
 	}
 
 }

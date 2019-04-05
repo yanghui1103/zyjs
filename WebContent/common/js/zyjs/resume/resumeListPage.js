@@ -42,7 +42,7 @@ function resumelistquery() {
 			title : '创建时间',
 			width : '10%'
 		} ] ],
-		fit : false,
+		fit : true,
 		idField : "id",
 		pagination : true,
 		singleSelect : true,

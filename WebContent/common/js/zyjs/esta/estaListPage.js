@@ -22,7 +22,7 @@ function estalistquery(){
                    { field: 'isdeleted', title: '状态', width: '20%' } ,
                    { field: 'createTime', title: '创建时间', width: '20%' }
                ]],
-             fit: false ,    
+             fit: true ,    
              idField: "id",
              pagination: true,
              singleSelect:true,

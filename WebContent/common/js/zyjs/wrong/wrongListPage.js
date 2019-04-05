@@ -34,7 +34,7 @@ function wronglistquery() {
 			title : '举报时间',
 			width : '10%'
 		} ] ],
-		fit : false,
+		fit : true,
 		idField : "id",
 		pagination : true,
 		singleSelect : true,
