@@ -14,9 +14,16 @@ public class TEsta extends BaseEntity {
 	private String address ;
 	private String netUrl;
 	private String cardId;
+	private String introduction;
 	
 	
 	
+	public String getIntroduction() {
+		return introduction;
+	}
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
 	public String getCardId() {
 		return cardId;
 	}

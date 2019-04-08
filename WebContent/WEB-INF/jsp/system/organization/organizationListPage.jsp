@@ -95,7 +95,7 @@
         		<shiro:hasRole name="OPT_ORG"> 
 				<a href="javascript:addOrgPage();" class="easyui-linkbutton" iconCls="icon-add"
 					data-options="selected:true">新增</a> 
-				<a href="#" class="easyui-linkbutton" iconCls="icon-edit" >编辑(未做)</a> 
+<!-- 				<a href="#" class="easyui-linkbutton" iconCls="icon-edit" >编辑(未做)</a>  -->
 				<a href="javascript:removeOrg();" class="easyui-linkbutton" iconCls="icon-remove" >删除</a>
 				</shiro:hasRole> 
 			</div>	

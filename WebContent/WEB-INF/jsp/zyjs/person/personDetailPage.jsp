@@ -21,9 +21,11 @@
 		<table class="kv-table">
 			<tbody>
 				<tr>
+					<td class="kv-label">姓名</td>
+					<td class="kv-content"><span id="name1">${person.name }</span></td>
 					<td class="kv-label">手机号码</td>
 					<td class="kv-content"><span id="name1">${person.phone }</span></td>
-					<td class="kv-label">地区</td>
+					<td class="kv-label">注册地区</td>
 					<td class="kv-content"><span id="name1">${person.area }</span></td>
 				</tr>
 			</tbody>

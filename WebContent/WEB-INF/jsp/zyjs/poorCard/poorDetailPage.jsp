@@ -67,7 +67,7 @@ function initResumes(obj){
 	obj.datagrid({
 		pagination : true,
 		method : "get",
-		url : ctx + 'esta/estas/areads'  ,
+		url : ctx + 'esta/estas/areadq'  ,
 		queryParams : serializeFormToJSON($("#poorlistFM").serializeArray()),
 		remoteSort : false,
 		columns : [ [ {
@@ -131,7 +131,7 @@ function initOpts(obj){
 	obj.datagrid({
 		pagination : true,
 		method : "get",
-		url : ctx + 'esta/estas/areads'  ,
+		url : ctx + 'esta/estas/areadq'  ,
 		queryParams : serializeFormToJSON($("#poorlistFM").serializeArray()),
 		remoteSort : false,
 		columns : [ [ {

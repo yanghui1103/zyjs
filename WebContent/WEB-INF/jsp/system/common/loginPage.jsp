@@ -17,7 +17,7 @@
 		<div class="hd-inner">
 			<span class="logo"></span>
 			<span class="split"></span>
-			<span class="sys-name">旗区就业服务局综合业务管理平台</span>
+			<span class="sys-name">就业服务局智慧就业云平台</span>
 		</div>
 	</div>
 	<div class="login-bd">
@@ -34,13 +34,6 @@
 							<div class="lg-password input-item clearfix">
 								<i class="iconfont">&#xe634;</i>
 								<input type="password" name="logPwd" value="123456" placeholder="请输入密码">
-							</div>
-							<div class="lg-check clearfix">
-								<div class="input-item">
-									<i class="iconfont">&#xe633;</i>
-									<input type="text" name="verificationCode" value="1234" placeholder="验证码">
-								</div>
-								<span class="check-code">XD34F</span>
 							</div>
 						<div class="alert alert-error">
 			              <i class="iconfont">&#xe62e;</i>

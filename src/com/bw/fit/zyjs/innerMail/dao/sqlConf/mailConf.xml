@@ -10,7 +10,7 @@
 	<insert id="insert" parameterType="tMail">
 		insert into t_innermail (id,creator,objid,createtime,remark,isread,isdeleted,typeCode) values
 		(#{id},#{creator,jdbcType=VARCHAR},#{objId,jdbcType=VARCHAR},sysdate
-		,#{remark,jdbcType=VARCHAR},'0','0',#{typeCode,jdbcType=VARCHAR})
+		,#{remark,jdbcType=VARCHAR},'0','0',#{type,jdbcType=VARCHAR})
 	</insert>
 	
 	<update id="updateExtenalUserStatus" parameterType="map">

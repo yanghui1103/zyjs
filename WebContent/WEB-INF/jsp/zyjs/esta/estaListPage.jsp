@@ -33,7 +33,7 @@
         	关键词: <input class="easyui-textbox" type="text" name="keyWords" style="width:166px;height:35px;line-height:35px;"></input>
         	<a href="javascript:estaReloadgrid();" class="easyui-linkbutton" iconCls="icon-search" data-options="selected:true">查询</a> 
         	   <shiro:hasRole name="ETLUserAdmin"> 
-        	<a href="javascript:stopExtenalCode();" class="easyui-linkbutton" iconCls="icon-remove" >禁用22</a> 
+        	<a href="javascript:stopExtenalCode();" class="easyui-linkbutton" iconCls="icon-remove" >禁用</a> 
         	<a href="javascript:startExtenalCode();" class="easyui-linkbutton" iconCls="icon-remove" >启用</a> 
         	<a href="javascript:initExtenalPwd();" class="easyui-linkbutton" iconCls="icon-edit" >初始化密码</a> 
         	<a href="javascript:openInnerMail();" class="easyui-linkbutton" iconCls="icon-edit" >发送站内信</a> 

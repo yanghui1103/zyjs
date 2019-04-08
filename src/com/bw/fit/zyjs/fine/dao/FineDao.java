@@ -10,4 +10,5 @@ public interface FineDao {
 	public List<TFine> selectAll(TFine fine);
 	
 	void update(TFine fine) throws RbackException;
+	void insert(TFine fine) throws RbackException;
 }

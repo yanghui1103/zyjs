@@ -41,13 +41,13 @@
 					<td class="kv-content"><span id="type">${esta.scale }</span></td>
 					<td class="kv-label">官网</td>
 					<td class="kv-content"><span id="isVisible">${esta.netUrl }</span></td>
-					<td class="kv-label">社会信用代码证号</td>
-					<td class="kv-content"><span id="adminer">${esta.cardId }</span></td>
-				</tr>
-				<tr>
 					<td class="kv-label">简介</td>
-					<td class="kv-content"><span id="type">${hunter.introduction }</span></td>
+					<td class="kv-content"><span id="introduction">${esta.introduction }</span></td>
+<!-- 					<td class="kv-label">社会信用代码证号</td> -->
+<%-- 					<td class="kv-content"><span id="adminer">${esta.cardId }</span></td> --%>
 				</tr>
+<!-- 				<tr> -->
+<!-- 				</tr> -->
 			</tbody>
 		</table>
 </body>

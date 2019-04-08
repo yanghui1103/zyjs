@@ -77,9 +77,8 @@ public class FairController  extends BaseController{
 	@RequestMapping(value="job/{id}",method=RequestMethod.GET)
 	public String jobdetail(@PathVariable String id,Model model){
 		TJobp f = fairDao.getJobDetail(id);
-		f.setCreator(accountService.get(f.getCreator()).getName());
 		model.addAttribute("job", f);
-		return "zyjs/job/jobDetailPage";
+		return "zyjs/job/jobDetaiPage";
 	}
 	
 	@RequestMapping(value="update/{id}",method=RequestMethod.GET)

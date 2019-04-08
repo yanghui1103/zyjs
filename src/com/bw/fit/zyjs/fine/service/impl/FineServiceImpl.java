@@ -36,5 +36,25 @@ public class FineServiceImpl implements FineService{
 			return json ;
 		}
 	}
+
+	@Override
+	public JSONObject create(TFine fine) throws RbackException {
+		JSONObject json = new JSONObject();
+		try {
+			Account account = PubFun.getCurrentAccount();
+			account.setCreator(account.getId());
+			fine.setId(PubFun.getUUID());
+			fineDao.insert(fine);
+			json.put("res", "2");
+			json.put("msg", "操作成功");
+		} catch (RbackException e) {
+			json = new JSONObject();
+			json.put("res", "1");
+			json.put("msg", e.getMsg());
+			throw e;
+		}finally{
+			return json ;
+		}
+	}
 	
 }

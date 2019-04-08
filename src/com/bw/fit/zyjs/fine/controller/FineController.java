@@ -2,6 +2,8 @@ package com.bw.fit.zyjs.fine.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +17,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.bw.fit.system.account.service.AccountService;
 import com.bw.fit.system.common.controller.BaseController;
 import com.bw.fit.system.common.model.RbackException;
+import com.bw.fit.system.common.util.PubFun;
 import com.bw.fit.zyjs.fine.dao.FineDao;
 import com.bw.fit.zyjs.fine.entity.TFine;
 import com.bw.fit.zyjs.fine.service.FineService;
@@ -49,4 +52,13 @@ public class FineController extends BaseController{
 		JSONObject json = fineService.update(fine) ;
 		return json ;
 	}
+	
+	@RequestMapping("fine")
+	@ResponseBody
+	public JSONObject create(@ModelAttribute TFine fine,HttpSession session ) throws RbackException{ 
+		fine.setCreator(PubFun.getCurrentAccount().getId());
+		JSONObject json = fineService.create(fine) ;
+		return json ;
+	}
+	
 }

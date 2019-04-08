@@ -12,8 +12,7 @@ $(function() {
 });
 
 function jobplistquery() {
-	$('#jobplistDg').datagrid({
-		pagination : true,
+	$('#jobplistDg').datagrid({ 
 		method : "get",
 		url : ctx + 'fair/jobs/' + $("#jobplistFMarea").val(),
 		queryParams : serializeFormToJSON($("#jobplistFM").serializeArray()),
@@ -74,7 +73,7 @@ function openDetail(id) {
 		$('#_loadDialog_jobplist').dialog({
 			title : '职位详情',
 			width : '100%',
-			height : 500,
+			height : 700,
 			closed : false,
 			cache : false,
 			maximizable : true,

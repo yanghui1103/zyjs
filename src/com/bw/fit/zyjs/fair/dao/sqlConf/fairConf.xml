@@ -37,11 +37,11 @@
 	</select>
 	
 	<insert id="create" parameterType="tFair"> 
-		insert into t_fair (id,name,address,introduction,startdate,enddate,typecode,department,department2,isdeleted,creator,createtime,area,phone)
+		insert into t_fair (id,name,address,introduction,startdate,enddate,typecode,department,department2,isdeleted,creator,createtime,area,phone,status)
 		values (#{id},#{name,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},#{introduction,jdbcType=VARCHAR}
 		,to_date(#{startDate,jdbcType=VARCHAR},'yyyy-MM-dd'),to_date(#{endDate,jdbcType=VARCHAR},'yyyy-MM-dd')
 		,#{typeCode},#{department,jdbcType=VARCHAR},#{department2,jdbcType=VARCHAR},'0'
-		,#{creator,jdbcType=VARCHAR},sysdate,#{area,jdbcType=VARCHAR} ,#{phone,jdbcType=VARCHAR})
+		,#{creator,jdbcType=VARCHAR},sysdate,#{area,jdbcType=VARCHAR} ,#{phone,jdbcType=VARCHAR},'readying')
 	</insert>
 	
 	<update id="updateStatus" parameterType="tFair"> 
@@ -75,7 +75,7 @@
 		from t_jobs a ,t_job2fair jf ,t_fair f,t_employer ea,t_company cp
       	where a.id = jf.jobid and jf.fairid = f.id  and a.isdeleted='0' 
       	and ea.id = a.employerid and ea.foreignid = cp.id 
-		and (a.name like '%'||#{keyWordsjdbcType=VARCHAR}||'%'  or f.name like '%'||#{keyWords,jdbcType=VARCHAR}||'%' 
+		and (a.name like '%'||#{keyWords,jdbcType=VARCHAR}||'%'  or f.name like '%'||#{keyWords,jdbcType=VARCHAR}||'%' 
   		or a.contactphone like '%'||#{keyWords,jdbcType=VARCHAR}||'%' 
  		) and   f.area = #{area,jdbcType=VARCHAR}
 	</select>
@@ -85,7 +85,7 @@
 	</select>
 	
 	<update id="delJob" parameterType="String" >
-		update t_jobs set isdeleted='1' ,versionTime=sysdate where id = #{jobId,jdbcType=VARCHAR}
+		update t_jobs set isdeleted='1'   where id = #{jobId,jdbcType=VARCHAR}
 	</update>
 	
 </mapper>   

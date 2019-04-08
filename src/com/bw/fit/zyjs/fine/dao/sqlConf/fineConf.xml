@@ -10,7 +10,6 @@
 	<select id="selectAll" parameterType="tfine" resultType="tfine">
 		select *from t_fine  a
  		 where a.isdeleted='0' and a.title  like '%'||#{keyWords,jdbcType=VARCHAR}||'%'
-		<include refid="areaSql" />
 		order by versionTime desc
 	</select>
 	
@@ -19,5 +18,10 @@
 		isdeleted = #{isdeleted,jdbcType=VARCHAR} 
 		where id = #{id,jdbcType=VARCHAR}
 	</update>
+	
+	<insert id="insert" parameterType="tfine">
+		insert into t_fine (id,title,path,isdeleted,creator,createTime) values
+		(#{id,jdbcType=VARCHAR},#{title,jdbcType=VARCHAR},#{path,jdbcType=VARCHAR},'0',#{creator,jdbcType=VARCHAR},sysdate)
+	</insert>
 	
 </mapper>   

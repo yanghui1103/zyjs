@@ -7,4 +7,5 @@ import com.bw.fit.zyjs.fine.entity.TFine;
 public interface FineService {
 
 	public JSONObject update(TFine fine) throws RbackException ;
+	public JSONObject create(TFine fine) throws RbackException ;
 }

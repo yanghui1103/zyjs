@@ -28,5 +28,10 @@ public class FineDaoImpl implements FineDao{
 		daoTemplete.update("fineSql.update", fine);
 	}
 
+	@Override
+	public void insert(TFine fine) throws RbackException {
+		daoTemplete.insert("fineSql.insert", fine);
+	}
+
 	
 }

@@ -49,7 +49,20 @@ function finelistquery() {
 	});
 }
 
+function addFine(){
 
+	$('#_loadDialog_finelist').dialog({
+		title : '新增',
+		width : '100%',
+		height : 500,
+		closed : false,
+		cache : false,
+		maximizable : true,
+		href : ctx + 'system/gotoIframePage/zyjs/fine/fineAddPage/-9'  ,
+		modal : true
+	});
+	
+}
 function openDetail(path){
 		$('#_loadDialog_finelist').dialog({    
 		    title: '详情',    

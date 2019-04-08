@@ -29,7 +29,7 @@
         	
 			<a href="javascript:deletejobp();" class="easyui-linkbutton" iconCls="icon-remove" >下架</a> 
         </form>
-        <input name="area" id="jobplistFMarea" value="${area }" type="hidden">
+        <input name="area" id="jobplistFMarea" value="${arg }" type="hidden">
       </div>
        <table id="jobplistDg" style="width:100%;height:480px;" >
         </table>
