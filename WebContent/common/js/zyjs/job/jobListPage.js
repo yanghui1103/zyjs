@@ -73,10 +73,10 @@ function openDetail(id) {
 		$('#_loadDialog_jobplist').dialog({
 			title : '职位详情',
 			width : '100%',
-			height : 700,
+			height : 500,
 			closed : false,
 			cache : false,
-			maximizable : true,
+			maximizable : false,
 			href : ctx + 'fair/job/'+id ,
 			modal : true
 		});
