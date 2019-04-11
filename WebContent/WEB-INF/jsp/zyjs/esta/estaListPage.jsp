@@ -42,7 +42,7 @@
         	<input name="area" id="area" value="${area }" type="hidden">
       </div>
       <div id="_loadDialog_estalist"></div>
-       <table id="estalistDg" style="width:100%;height:480px;" >
+       <table id="estalistDg" toolbar="#tb" style="width:100%;height:480px;" >
         </table>
 </body> 
 </html>

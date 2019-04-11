@@ -7,7 +7,7 @@
 		</if>
 	</sql>
 	<select id="selectAll" parameterType="TEsta" resultType="TEsta">
-		select * from (select tc.id,'企业' temp_str1,tc.email phone,tc.createtime,tc.name,isdeleted,area from t_company tc
+		select * from (select tc.id,'企业' temp_str1,tc.phone phone,tc.createtime,tc.name,isdeleted,area from t_company tc
 		union all
 		select ta.id,'个人' temp_str1,ta.phone,ta.createtime,ta.name name,isdeleted,area from t_person ta ) a
 		where 1=1 and ( a.name like '%'||#{keyWords,jdbcType=VARCHAR}||'%' 

@@ -80,6 +80,7 @@ public class CompanyController extends BaseController {
 		te.setIndustry(dictService.getDictByValue(te.getIndustry()).getDictName());
 		te.setScale(dictService.getDictByValue(te.getScale()).getDictName());
 		te.setCompType(dictService.getDictByValue(te.getCompType()).getDictName());
+		te.setArea(dictService.getDictsByParentValue(te.getArea())==null?te.getArea():dictService.getDictsByParentValue(te.getArea()).getDictName());
 		model.addAttribute("esta", te);
 		return "zyjs/esta/estaDetailPage";
 	}

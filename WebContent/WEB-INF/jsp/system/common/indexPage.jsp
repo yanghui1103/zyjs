@@ -11,7 +11,8 @@
 <head> 
     <meta charset="utf-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
-    <title>信息管理系统</title> 
+    <meta http-equiv="X-UA-Compatible" content="IE=11" >
+    <title>旗区就业局智慧就业云平台</title> 
 	<script type="text/javascript" src="<%=basePath%>common/fit/v4/common/common.js"></script>
 	<link href="<%=basePath%>common/fit/v4/static/lightblue/css/base.css" rel="stylesheet">
 	<link href="<%=basePath%>common/fit/v4/custom/lightblue/uimaker/easyui.css"  rel="stylesheet" >

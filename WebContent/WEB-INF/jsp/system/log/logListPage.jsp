@@ -22,8 +22,6 @@
 	<script type="text/javascript" src="<%=basePath%>common/js/system/log/logListPage.js"></script>
 </head> 
 <body>	
-    <div class="container">    
-        
       <div id="tb" style="padding:0 30px;">
 		<form id="loglistFM">
         	账号: <input class="easyui-textbox" type="text" name="creator" style="width:166px;height:35px;line-height:35px;"></input>
@@ -31,9 +29,8 @@
         </form>
       </div>  
       
-       <table id="logListDg" style="width:100%;height:480px;" >
-        </table>
-    </div>   
+       <table id="logListDg" toolbar="#tb" style="width:100%;height:480px;" >
+        </table>  
     <div id="_loadDialog_loglist"></div>  
 </body> 
 </html>

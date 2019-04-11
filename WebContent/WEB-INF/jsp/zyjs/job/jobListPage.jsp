@@ -31,7 +31,7 @@
         </form>
         <input name="area" id="jobplistFMarea" value="${arg }" type="hidden">
       </div>
-       <table id="jobplistDg" style="width:100%;height:480px;" >
+       <table id="jobplistDg" toolbar="#tb" style="width:100%;height:480px;" >
         </table>
         <div id="_loadDialog_jobplist"></div>
 </body> 

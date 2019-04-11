@@ -31,7 +31,7 @@
         </form>
         <input name="area" id="blacklistFMarea" value="${arg }" type="hidden">
       </div>
-       <table id="blacklistDg" style="width:100%;height:480px;" >
+       <table id="blacklistDg"  toolbar="#tb"  style="width:100%;height:480px;" >
         </table>
         <div id="_loadDialog_blacklist"></div>
 </body> 
