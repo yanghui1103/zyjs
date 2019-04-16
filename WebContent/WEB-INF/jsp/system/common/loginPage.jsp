@@ -53,7 +53,7 @@
 		<div class="ft-inner">
 			<div class="about-us">
 			</div>
-			<div class="address">地址：内蒙古鄂尔多斯市东胜区&nbsp;邮编：210019&nbsp;&nbsp;Copyright&nbsp;©&nbsp;2015&nbsp;-&nbsp;2016&nbsp;&nbsp;版权所有</div>
+			<div class="address">地址：内蒙古鄂尔多斯市&nbsp;邮编：017000&nbsp;&nbsp;Copyright&nbsp;©&nbsp;2019&nbsp;-&nbsp;2030&nbsp;&nbsp;博为科技公司版权所有[服务电话：186-0477-3099]</div>
 		</div>
 	</div>
 	<script type="text/javascript">

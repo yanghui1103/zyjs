@@ -25,6 +25,7 @@ import com.bw.fit.system.common.controller.BaseController;
 import com.bw.fit.system.common.model.RbackException;
 import com.bw.fit.system.common.util.PubFun;
 import com.bw.fit.system.dict.service.DictService;
+import com.bw.fit.zyjs.company.entity.TEsta;
 import com.bw.fit.zyjs.fair.dao.FairDao;
 import com.bw.fit.zyjs.fair.entity.TFair;
 import com.bw.fit.zyjs.fair.entity.TJobp;
@@ -32,6 +33,7 @@ import com.bw.fit.zyjs.fair.model.Fair;
 import com.bw.fit.zyjs.fair.service.FairService;
 import com.bw.fit.zyjs.hunter.model.Hunter;
 import com.bw.fit.zyjs.hunter.service.HunterService;
+import com.github.pagehelper.Page;
 
 /****
  * 招聘会
@@ -113,18 +115,24 @@ public class FairController  extends BaseController{
 
 	@RequestMapping(value="jobs/{area}",method=RequestMethod.GET)
 	@ResponseBody
-	public JSONArray jobs(@PathVariable String area,@ModelAttribute Fair fair){
+	public JSONObject jobs(@PathVariable String area,@ModelAttribute Fair fair){
 		TFair t = new TFair();
 		PubFun.copyProperties(t, fair);
 		t.setArea(area);
 		java.util.List<TJobp> list = fairDao.allJobs(t);
-		if(list !=null){
-			for(TJobp tt:list){ 
+
+		Page zjks = new Page();
+		if(list !=null && list.size()>0){
+			for(TJobp tt:list){
+				zjks.add(tt);
 			}
-			return (JSONArray)JSONArray.toJSON(list) ;
-		}else{
-			return null ;
+			zjks.setTotal(((Page)list).getTotal());
 		}
+
+		JSONObject js = new JSONObject();
+		js.put("total",((Page)list).getTotal());
+		js.put("rows",  JSONObject.toJSON(list));
+		return js ;
 	}
 	
 	@RequestMapping(value="fairAdd/{area}",method=RequestMethod.GET)
@@ -151,7 +159,7 @@ public class FairController  extends BaseController{
 	
 	@RequestMapping(value="fairs/{area}",method=RequestMethod.GET)
 	@ResponseBody
-	public JSONArray selectAll(@PathVariable String area,@ModelAttribute Fair fair){
+	public JSONObject selectAll(@PathVariable String area,@ModelAttribute Fair fair){
 		TFair t = new TFair();
 		PubFun.copyProperties(t, fair);
 		java.util.List<TFair> fs = fairDao.all(t);
@@ -160,10 +168,22 @@ public class FairController  extends BaseController{
 				tt.setTypeCode(dictService.getDictByValue(tt.getTypeCode()).getDictName());
 				tt.setStatus((dictService.getDictsByParentValue(tt.getStatus())==null)?"未知":(dictService.getDictsByParentValue(tt.getStatus())).getDictName());
 			}
-			return (JSONArray)JSONArray.toJSON(fs) ;
-		}else{
-			return null ;
+			 
 		}
+		
+
+		Page zjks = new Page();
+		if(fs !=null && fs.size()>0){
+			for(TFair tt:fs){
+				zjks.add(tt);
+			}
+			zjks.setTotal(((Page)fs).getTotal());
+		}
+
+		JSONObject js = new JSONObject();
+		js.put("total",((Page)fs).getTotal());
+		js.put("rows",  JSONObject.toJSON(fs));
+		return js ;
 	}
 	
 	@RequestMapping(value="close/{id}",method=RequestMethod.PUT)

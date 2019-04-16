@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,7 @@ import com.bw.fit.system.dict.service.DictService;
 import com.bw.fit.zyjs.company.dao.EstaDao;
 import com.bw.fit.zyjs.company.entity.TEsta;
 import com.bw.fit.zyjs.company.service.EstaService;
+import com.github.pagehelper.Page;
 
 @RequestMapping("esta")
 @Controller
@@ -36,19 +38,27 @@ public class CompanyController extends BaseController {
 	
 	@RequestMapping("estas/{area}")
 	@ResponseBody
-	public JSONArray estas(@PathVariable String area,@RequestParam(value="keyWords") String keyWords){
-		TEsta te = new TEsta();
+	public JSONObject estas(@ModelAttribute TEsta te,@PathVariable String area,@RequestParam(value="keyWords") String keyWords){
 		te.setArea(area);
 		te.setKeyWords(keyWords);
 		List<TEsta> tes = estaDao.selectAll(te);
 		for(TEsta t:tes){
 			t.setIsdeleted(PubFun.transIsdeleted(t.getIsdeleted()));
 		}
+
+		Page zjks = new Page();
 		if(tes !=null && tes.size()>0){
-			return (JSONArray) JSONArray.toJSON(tes);
-		}else{
-			return null ;
+			for(TEsta tt:tes){
+				zjks.add(tt);
+			}
+			zjks.setTotal(((Page)tes).getTotal());
 		}
+
+		JSONObject js = new JSONObject();
+		js.put("total",((Page)zjks).getTotal());
+		js.put("rows",  JSONObject.toJSON(zjks));
+		return js ;
+		
 	}
 	
 	@RequestMapping("gotoEstas/{area}")
