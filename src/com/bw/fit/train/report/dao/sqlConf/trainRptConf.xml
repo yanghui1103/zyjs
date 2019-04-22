@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="trainSignSql"> 
+
+	<select id="selectAll" parameterType="TTrainSign" resultType="TTrainSign">
+		select a.*,a.operate temp_str1  from t_trainsign  a   
+		where <![CDATA[ a.createtime >= to_date(#{start_date,jdbcType=VARCHAR},'yyyy-MM-dd') 
+        and a.createtime <= to_date(#{end_date,jdbcType=VARCHAR},'yyyy-MM-dd')   ]]>
+        order by createtime asc 
+	</select>
+	
+</mapper>   

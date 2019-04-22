@@ -42,6 +42,7 @@
     	<package name="com.bw.fit.zyjs.resume.entity"/>
     	<package name="com.bw.fit.zyjs.black.entity"/>
     	<package name="com.bw.fit.zyjs.fine.entity"/>
+    	<package name="com.bw.fit.train.report.entity"/>
     	
     	
     </typeAliases>
